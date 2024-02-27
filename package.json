@@ -1,6 +1,6 @@
 {
   "name": "cottage-ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "files": [
     "dist"
@@ -13,8 +13,10 @@
       "require": "./dist/cottage-ui.umd.cjs"
     }
   },
+  "sideEffects": ["dist/*.css"],
   "scripts": {
     "dev": "vite",
+    "reinstall": "rm -rf node_modules && npm install",
     "prebuild": "rm -rf dist",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

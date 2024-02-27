@@ -18,6 +18,7 @@ export default defineConfig({
 		rollupOptions: {
 			external: ["react", "react-dom", "react/jsx-runtime"],
 			output: {
+				intro: 'import "./style.css"',
 				globals: {
 					react: "React",
 					"react-dom": "ReactDOM",
