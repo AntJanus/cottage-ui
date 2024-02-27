@@ -8,6 +8,7 @@
 		"paths": {
 			"cottage-ui": ["./lib/main.ts"]
 		},
+		"types": ["vitest/globals"],
 
 		/* Bundler mode */
 		"moduleResolution": "bundler",
@@ -23,6 +24,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src"],
+	"include": ["src", "lib"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
