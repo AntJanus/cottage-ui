@@ -1,6 +1,6 @@
 {
   "name": "cottage-ui",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "type": "module",
   "files": [
     "dist"
@@ -11,8 +11,10 @@
     ".": {
       "import": "./dist/cottage-ui.js",
       "require": "./dist/cottage-ui.umd.cjs"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   },
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "prebuild": "rm -rf dist",
