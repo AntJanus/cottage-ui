@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import Button, { BUTTON_SIZES, BUTTON_VARIANTS } from "./Button";
+import { Button, BUTTON_SIZES, BUTTON_VARIANTS } from "./Button";
 
-describe(`Component: ${Button.name}`, () => {
+describe("Component: Button", () => {
   it("should render default", () => {
     render(<Button>My button</Button>);
 
@@ -31,7 +31,7 @@ describe(`Component: ${Button.name}`, () => {
   });
 
   it("should render large button", () => {
-    const { container } = render(<Button size={BUTTON_SIZES.LARGE}>My button</Button>);
+    render(<Button size={BUTTON_SIZES.LARGE}>My button</Button>);
     const button = screen.getByRole('button')
 
     expect(button).toMatchInlineSnapshot(`

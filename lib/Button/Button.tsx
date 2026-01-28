@@ -27,10 +27,8 @@ interface ButtonProps {
 	size?: BUTTON_SIZES;
 }
 
-const Button = ({ children, onClick, variant = BUTTON_VARIANTS.DEFAULT, size = BUTTON_SIZES.DEFAULT }: ButtonProps): ReactNode => {
+export const Button = ({ children, onClick, variant = BUTTON_VARIANTS.DEFAULT, size = BUTTON_SIZES.DEFAULT }: ButtonProps): ReactNode => {
 	const className = `rounded p-2 ${ButtonVariantStyling[variant]} ${ButtonSizeStyling[size]}`
 
 	return <button onClick={onClick} className={className}>{children}</button>;
 };
-
-export default Button

@@ -1,2 +1,2 @@
 import './tailwind.css'
-export { Button } from './Button/Button'
+export { Button, BUTTON_VARIANTS, BUTTON_SIZES } from './Button/Button'
