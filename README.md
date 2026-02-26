@@ -2,6 +2,10 @@
 
 A React component library built with TypeScript, TailwindCSS, and Vite. Created as part of the [Build A React UI Library series](https://www.youtube.com/playlist?list=PLcfAVClOb1BiA6oIfHQ6Am3lpWzOmMO6J).
 
+## Demo
+
+![Cottage UI Components](docs/demo.png)
+
 ## Features
 
 - TypeScript-first component library
