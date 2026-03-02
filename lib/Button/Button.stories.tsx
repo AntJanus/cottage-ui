@@ -19,6 +19,11 @@ const meta: Meta<typeof Button> = {
 			control: 'select',
 			options: Object.values(BUTTON_VARIANTS),
 			description: 'Button variant'
+		},
+		type: {
+			control: 'select',
+			options: ['button', 'submit', 'reset'],
+			description: 'Native button type'
 		}
 	}
 }
@@ -48,3 +53,9 @@ export const Emoji: Story = {
 	}
 }
 
+export const Submit: Story = {
+	args: {
+		children: 'Submit form',
+		type: 'submit'
+	}
+}

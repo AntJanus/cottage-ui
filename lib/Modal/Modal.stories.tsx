@@ -16,6 +16,10 @@ const meta: Meta<typeof Modal> = {
 			control: 'text',
 			description: 'Modal title'
 		},
+		'aria-label': {
+			control: 'text',
+			description: 'Accessible label used when no title is provided'
+		},
 		size: {
 			control: 'select',
 			options: Object.values(MODAL_SIZES),
@@ -61,6 +65,7 @@ export const Large: Story = {
 export const NoTitle: Story = {
 	args: {
 		children: 'Modal without a title.',
-		isOpen: true
+		isOpen: true,
+		'aria-label': 'Details dialog'
 	}
 }

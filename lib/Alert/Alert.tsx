@@ -34,7 +34,7 @@ export const Alert = ({ children, title, onDismiss, variant = ALERT_VARIANTS.DEF
 					{children}
 				</div>
 				{onDismiss && (
-					<button onClick={onDismiss} className="ml-4 font-bold" aria-label="Dismiss">
+					<button type="button" onClick={onDismiss} className="ml-4 font-bold" aria-label="Dismiss">
 						<span aria-hidden="true">X</span>
 					</button>
 				)}

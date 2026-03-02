@@ -12,7 +12,14 @@ describe("Component: Tabs", () => {
 		render(<Tabs tabs={sampleTabs} />);
 		const tablist = screen.getByRole('tablist')
 		expect(tablist).toHaveAttribute('aria-orientation', 'horizontal')
+		expect(tablist).toHaveAttribute('aria-label', 'Tabs')
 		expect(screen.getAllByRole('tab')).toHaveLength(3)
+	});
+
+	it("should set custom aria-label on tablist", () => {
+		render(<Tabs tabs={sampleTabs} aria-label="Settings sections" />);
+		const tablist = screen.getByRole('tablist')
+		expect(tablist).toHaveAttribute('aria-label', 'Settings sections')
 	});
 
 	it("should render pills variant", () => {

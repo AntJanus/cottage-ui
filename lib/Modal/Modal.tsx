@@ -19,26 +19,24 @@ interface ModalProps {
 	onClose: () => void;
 	title?: string;
 	size?: MODAL_SIZES;
+	'aria-label'?: string;
 }
 
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEFAULT }: ModalProps): ReactNode => {
+export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEFAULT, ...ariaProps }: ModalProps): ReactNode => {
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const previouslyFocusedRef = useRef<HTMLElement | null>(null);
-	const onCloseRef = useRef(onClose);
 	const titleId = useId();
-
-	onCloseRef.current = onClose;
 
 	useEffect(() => {
 		if (!isOpen) return;
 
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				onCloseRef.current();
-				return;
-			}
+			const handleKeyDown = (e: KeyboardEvent) => {
+				if (e.key === 'Escape') {
+					onClose();
+					return;
+				}
 
 			if (e.key === 'Tab' && dialogRef.current) {
 				const focusable = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
@@ -74,7 +72,7 @@ export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEF
 			document.removeEventListener('keydown', handleKeyDown);
 			previouslyFocusedRef.current?.focus();
 		};
-	}, [isOpen]);
+	}, [isOpen, onClose]);
 
 	if (!isOpen) return null;
 
@@ -87,13 +85,14 @@ export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEF
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby={title ? titleId : undefined}
+				aria-label={title ? undefined : ariaProps['aria-label'] || 'Modal dialog'}
 				tabIndex={-1}
 				className={contentClassName}
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className="flex items-center justify-between mb-4">
 					{title && <h2 id={titleId} className="text-lg font-semibold">{title}</h2>}
-					<button onClick={onClose} className="ml-auto text-gray-400 hover:text-gray-600" aria-label="Close">
+					<button type="button" onClick={onClose} className="ml-auto text-gray-400 hover:text-gray-600" aria-label="Close">
 						<span aria-hidden="true">&#x2715;</span>
 					</button>
 				</div>

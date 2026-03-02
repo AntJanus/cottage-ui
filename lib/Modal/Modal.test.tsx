@@ -7,6 +7,7 @@ describe("Component: Modal", () => {
 		const dialog = screen.getByRole('dialog');
 		expect(dialog).toMatchInlineSnapshot(`
 			<div
+			  aria-label="Modal dialog"
 			  aria-modal="true"
 			  class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative"
 			  role="dialog"
@@ -18,6 +19,7 @@ describe("Component: Modal", () => {
 			    <button
 			      aria-label="Close"
 			      class="ml-auto text-gray-400 hover:text-gray-600"
+			      type="button"
 			    >
 			      <span
 			        aria-hidden="true"
@@ -79,5 +81,18 @@ describe("Component: Modal", () => {
 		render(<Modal isOpen={true} onClose={vi.fn()}>Modal content</Modal>);
 		const dialog = screen.getByRole('dialog');
 		expect(dialog).toHaveAttribute('aria-modal', 'true');
+	});
+
+	it("should use custom aria-label when title is not provided", () => {
+		render(<Modal isOpen={true} onClose={vi.fn()} aria-label="Filters dialog">Modal content</Modal>);
+		const dialog = screen.getByRole('dialog');
+		expect(dialog).toHaveAttribute('aria-label', 'Filters dialog');
+	});
+
+	it("should prefer aria-labelledby when title is provided", () => {
+		render(<Modal isOpen={true} onClose={vi.fn()} aria-label="Ignored label" title="My Modal">Modal content</Modal>);
+		const dialog = screen.getByRole('dialog');
+		expect(dialog).toHaveAttribute('aria-labelledby');
+		expect(dialog).not.toHaveAttribute('aria-label');
 	});
 });

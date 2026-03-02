@@ -28,9 +28,10 @@ interface TabsProps {
 	activeTab?: number;
 	onTabChange?: (index: number) => void;
 	variant?: TAB_VARIANTS;
+	'aria-label'?: string;
 }
 
-export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.DEFAULT }: TabsProps): ReactNode => {
+export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.DEFAULT, ...ariaProps }: TabsProps): ReactNode => {
 	const styles = TabVariantStyling[variant]
 	const baseId = useId()
 	const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -57,9 +58,10 @@ export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.
 
 	return (
 		<div>
-			<div role="tablist" aria-orientation="horizontal" className={styles.tabList}>
+			<div role="tablist" aria-orientation="horizontal" aria-label={ariaProps['aria-label'] || 'Tabs'} className={styles.tabList}>
 				{tabs.map((tab, index) => (
 					<button
+						type="button"
 						key={index}
 						ref={(el) => { tabRefs.current[index] = el }}
 						id={`${baseId}-tab-${index}`}

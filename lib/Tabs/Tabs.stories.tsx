@@ -8,6 +8,10 @@ const meta: Meta<typeof Tabs> = {
 			control: 'number',
 			description: 'Active tab index'
 		},
+		'aria-label': {
+			control: 'text',
+			description: 'Accessible label for the tab list'
+		},
 		variant: {
 			control: 'select',
 			options: Object.values(TAB_VARIANTS),
@@ -22,6 +26,7 @@ type Story = StoryObj<typeof Tabs>
 
 export const Default: Story = {
 	args: {
+		'aria-label': 'Product sections',
 		tabs: [
 			{ label: 'Overview', content: 'Overview content goes here.' },
 			{ label: 'Details', content: 'Details content goes here.' },
@@ -32,6 +37,7 @@ export const Default: Story = {
 
 export const Pills: Story = {
 	args: {
+		'aria-label': 'Product sections',
 		tabs: [
 			{ label: 'Overview', content: 'Overview content goes here.' },
 			{ label: 'Details', content: 'Details content goes here.' },

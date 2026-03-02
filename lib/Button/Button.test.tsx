@@ -10,6 +10,7 @@ describe("Component: Button", () => {
     expect(button).toMatchInlineSnapshot(`
       <button
         class="rounded p-2 bg-gray-700 hover:bg-gray-800 text-white "
+        type="button"
       >
         My button
       </button>
@@ -24,6 +25,7 @@ describe("Component: Button", () => {
     expect(button).toMatchInlineSnapshot(`
       <button
         class="rounded p-2 bg-orange-700 hover:bg-orange-500 text-white "
+        type="button"
       >
         My button
       </button>
@@ -37,6 +39,7 @@ describe("Component: Button", () => {
     expect(button).toMatchInlineSnapshot(`
       <button
         class="rounded p-2 bg-gray-700 hover:bg-gray-800 text-white text-lg"
+        type="button"
       >
         My button
       </button>
@@ -53,5 +56,11 @@ describe("Component: Button", () => {
     button.click()
 
     expect(mock).toHaveBeenCalledOnce()
+  });
+
+  it("should support custom type", () => {
+    render(<Button type="submit">Submit</Button>);
+    const button = screen.getByRole('button')
+    expect(button).toHaveAttribute('type', 'submit')
   });
 });

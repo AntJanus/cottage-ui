@@ -25,10 +25,11 @@ interface ButtonProps {
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 	variant?: BUTTON_VARIANTS;
 	size?: BUTTON_SIZES;
+	type?: 'button' | 'submit' | 'reset';
 }
 
-export const Button = ({ children, onClick, variant = BUTTON_VARIANTS.DEFAULT, size = BUTTON_SIZES.DEFAULT }: ButtonProps): ReactNode => {
+export const Button = ({ children, onClick, variant = BUTTON_VARIANTS.DEFAULT, size = BUTTON_SIZES.DEFAULT, type = 'button' }: ButtonProps): ReactNode => {
 	const className = `rounded p-2 ${ButtonVariantStyling[variant]} ${ButtonSizeStyling[size]}`
 
-	return <button onClick={onClick} className={className}>{children}</button>;
+	return <button type={type} onClick={onClick} className={className}>{children}</button>;
 };
