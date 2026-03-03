@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 
-# Lock files for other package managers (project uses pnpm)
-package-lock.json
+# Lock files for other package managers (project uses npm)
+pnpm-lock.yaml
 yarn.lock
 
 # Editor directories and files
