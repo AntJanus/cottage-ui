@@ -1,4 +1,4 @@
-import type { MouseEvent, ReactNode } from "react";
+import React, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 export enum BUTTON_VARIANTS {
 	PRIMARY = 'primary',
@@ -20,16 +20,18 @@ const ButtonSizeStyling: Record<BUTTON_SIZES, string> = {
 	[BUTTON_SIZES.LARGE]: 'text-lg'
 }
 
-interface ButtonProps {
+export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
 	children: ReactNode;
-	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 	variant?: BUTTON_VARIANTS;
 	size?: BUTTON_SIZES;
-	type?: 'button' | 'submit' | 'reset';
 }
 
-export const Button = ({ children, onClick, variant = BUTTON_VARIANTS.DEFAULT, size = BUTTON_SIZES.DEFAULT, type = 'button' }: ButtonProps): ReactNode => {
-	const className = `rounded p-2 ${ButtonVariantStyling[variant]} ${ButtonSizeStyling[size]}`
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+	({ children, variant = BUTTON_VARIANTS.DEFAULT, size = BUTTON_SIZES.DEFAULT, type = 'button', className: customClassName, ...rest }, ref): ReactNode => {
+		const className = `rounded p-2 ${ButtonVariantStyling[variant]} ${ButtonSizeStyling[size]}${customClassName ? ` ${customClassName}` : ''}`
 
-	return <button type={type} onClick={onClick} className={className}>{children}</button>;
-};
+		return <button ref={ref} type={type} className={className} {...rest}>{children}</button>;
+	}
+);
+
+Button.displayName = 'Button';

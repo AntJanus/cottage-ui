@@ -8,6 +8,11 @@ const sampleTabs = [
 ]
 
 describe("Component: Tabs", () => {
+	it("should return null for empty tabs array", () => {
+		const { container } = render(<Tabs tabs={[]} />);
+		expect(container.firstChild).toBeNull()
+	});
+
 	it("should render default", () => {
 		render(<Tabs tabs={sampleTabs} />);
 		const tablist = screen.getByRole('tablist')

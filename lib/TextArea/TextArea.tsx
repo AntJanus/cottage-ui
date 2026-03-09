@@ -1,4 +1,4 @@
-import type { ChangeEvent, ReactNode } from "react";
+import React, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 export enum TEXTAREA_VARIANTS {
 	DEFAULT = 'default',
@@ -10,35 +10,25 @@ const TextAreaVariantStyling: Record<TEXTAREA_VARIANTS, string> = {
 	[TEXTAREA_VARIANTS.ERROR]: 'border-red-500 focus:ring-red-500 focus:border-red-500'
 }
 
-interface TextAreaProps {
-	id?: string;
-	name?: string;
-	value?: string;
-	onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-	placeholder?: string;
-	disabled?: boolean;
-	rows?: number;
+export interface TextAreaProps extends ComponentPropsWithoutRef<'textarea'> {
 	variant?: TEXTAREA_VARIANTS;
-	'aria-describedby'?: string;
-	'aria-label'?: string;
 }
 
-export const TextArea = ({ id, name, value, onChange, placeholder, disabled = false, rows = 3, variant = TEXTAREA_VARIANTS.DEFAULT, ...ariaProps }: TextAreaProps): ReactNode => {
-	const className = `rounded border p-2 focus:outline-none focus:ring-2 ${TextAreaVariantStyling[variant]}${disabled ? ' opacity-50' : ''}`
+export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
+	({ rows = 3, variant = TEXTAREA_VARIANTS.DEFAULT, disabled = false, className: customClassName, ...rest }, ref): ReactNode => {
+		const className = `rounded border p-2 focus:outline-none focus:ring-2 ${TextAreaVariantStyling[variant]}${disabled ? ' opacity-50' : ''}${customClassName ? ` ${customClassName}` : ''}`
 
-	return (
-		<textarea
-			id={id}
-			name={name}
-			value={value}
-			onChange={onChange}
-			placeholder={placeholder}
-			disabled={disabled}
-			rows={rows}
-			aria-invalid={variant === TEXTAREA_VARIANTS.ERROR || undefined}
-			aria-describedby={ariaProps['aria-describedby']}
-			aria-label={ariaProps['aria-label']}
-			className={className}
-		/>
-	);
-};
+		return (
+			<textarea
+				ref={ref}
+				rows={rows}
+				disabled={disabled}
+				aria-invalid={variant === TEXTAREA_VARIANTS.ERROR || undefined}
+				className={className}
+				{...rest}
+			/>
+		);
+	}
+);
+
+TextArea.displayName = 'TextArea';

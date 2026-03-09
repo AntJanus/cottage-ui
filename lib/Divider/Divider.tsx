@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export enum DIVIDER_ORIENTATIONS {
 	DEFAULT = 'default',
@@ -12,16 +12,16 @@ const DividerOrientationStyling: Record<DIVIDER_ORIENTATIONS, string> = {
 	[DIVIDER_ORIENTATIONS.VERTICAL]: 'border-l border-gray-200 mx-4 self-stretch'
 }
 
-interface DividerProps {
+export interface DividerProps extends ComponentPropsWithoutRef<'hr'> {
 	orientation?: DIVIDER_ORIENTATIONS;
 }
 
-export const Divider = ({ orientation = DIVIDER_ORIENTATIONS.DEFAULT }: DividerProps): ReactNode => {
-	const className = DividerOrientationStyling[orientation];
+export const Divider = ({ orientation = DIVIDER_ORIENTATIONS.DEFAULT, className: customClassName, ...rest }: DividerProps): ReactNode => {
+	const className = `${DividerOrientationStyling[orientation]}${customClassName ? ` ${customClassName}` : ''}`;
 
 	if (orientation === DIVIDER_ORIENTATIONS.VERTICAL) {
-		return <div role="separator" aria-orientation="vertical" className={className} />;
+		return <div role="separator" aria-orientation="vertical" className={className} {...rest} />;
 	}
 
-	return <hr className={className} />;
+	return <hr className={className} {...rest} />;
 };

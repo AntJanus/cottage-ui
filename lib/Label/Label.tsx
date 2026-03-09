@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export enum LABEL_VARIANTS {
 	REQUIRED = 'required',
@@ -10,17 +10,16 @@ const LabelVariantStyling: Record<LABEL_VARIANTS, string> = {
 	[LABEL_VARIANTS.REQUIRED]: 'text-gray-800 font-semibold text-sm'
 }
 
-interface LabelProps {
+export interface LabelProps extends Omit<ComponentPropsWithoutRef<'label'>, 'children'> {
 	children: ReactNode;
-	htmlFor?: string;
 	variant?: LABEL_VARIANTS;
 }
 
-export const Label = ({ children, htmlFor, variant = LABEL_VARIANTS.DEFAULT }: LabelProps): ReactNode => {
-	const className = LabelVariantStyling[variant]
+export const Label = ({ children, variant = LABEL_VARIANTS.DEFAULT, className: customClassName, ...rest }: LabelProps): ReactNode => {
+	const className = `${LabelVariantStyling[variant]}${customClassName ? ` ${customClassName}` : ''}`
 
 	return (
-		<label htmlFor={htmlFor} className={className}>
+		<label className={className} {...rest}>
 			{children}
 			{variant === LABEL_VARIANTS.REQUIRED && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
 			{variant === LABEL_VARIANTS.REQUIRED && <span className="sr-only">(required)</span>}

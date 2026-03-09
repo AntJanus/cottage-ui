@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export enum STACK_DIRECTIONS {
 	DEFAULT = 'default',
@@ -24,14 +24,14 @@ const StackGapStyling: Record<STACK_GAPS, string> = {
 	[STACK_GAPS.LARGE]: 'gap-6'
 }
 
-interface StackProps {
+export interface StackProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
 	children: ReactNode;
 	direction?: STACK_DIRECTIONS;
 	gap?: STACK_GAPS;
 }
 
-export const Stack = ({ children, direction = STACK_DIRECTIONS.DEFAULT, gap = STACK_GAPS.DEFAULT }: StackProps): ReactNode => {
-	const className = `${StackDirectionStyling[direction]} ${StackGapStyling[gap]}`
+export const Stack = ({ children, direction = STACK_DIRECTIONS.DEFAULT, gap = STACK_GAPS.DEFAULT, className: customClassName, ...rest }: StackProps): ReactNode => {
+	const className = `${StackDirectionStyling[direction]} ${StackGapStyling[gap]}${customClassName ? ` ${customClassName}` : ''}`
 
-	return <div className={className}>{children}</div>;
+	return <div className={className} {...rest}>{children}</div>;
 };

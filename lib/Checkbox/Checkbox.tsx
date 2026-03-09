@@ -1,4 +1,4 @@
-import type { ChangeEvent, ReactNode } from "react";
+import React, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 export enum CHECKBOX_VARIANTS {
 	DEFAULT = 'default'
@@ -8,36 +8,29 @@ const CheckboxVariantStyling: Record<CHECKBOX_VARIANTS, string> = {
 	[CHECKBOX_VARIANTS.DEFAULT]: 'accent-orange-600'
 }
 
-interface CheckboxProps {
-	id?: string;
-	name?: string;
-	checked?: boolean;
-	defaultChecked?: boolean;
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-	disabled?: boolean;
+export interface CheckboxProps extends Omit<ComponentPropsWithoutRef<'input'>, 'type'> {
 	label?: string;
 	variant?: CHECKBOX_VARIANTS;
-	'aria-describedby'?: string;
 }
 
-export const Checkbox = ({ id, name, checked, defaultChecked, onChange, disabled = false, label, variant = CHECKBOX_VARIANTS.DEFAULT, ...ariaProps }: CheckboxProps): ReactNode => {
-	const wrapperClassName = `flex items-center gap-2${disabled ? ' opacity-50' : ''}`
-	const inputClassName = CheckboxVariantStyling[variant]
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+	({ label, variant = CHECKBOX_VARIANTS.DEFAULT, disabled = false, className: customClassName, ...rest }, ref): ReactNode => {
+		const wrapperClassName = `flex items-center gap-2${disabled ? ' opacity-50' : ''}`
+		const inputClassName = `${CheckboxVariantStyling[variant]}${customClassName ? ` ${customClassName}` : ''}`
 
-	return (
-		<label className={wrapperClassName}>
-			<input
-				id={id}
-				name={name}
-				type="checkbox"
-				checked={checked}
-				defaultChecked={defaultChecked}
-				onChange={onChange}
-				disabled={disabled}
-				aria-describedby={ariaProps['aria-describedby']}
-				className={inputClassName}
-			/>
-			{label && <span className="text-gray-700">{label}</span>}
-		</label>
-	);
-};
+		return (
+			<label className={wrapperClassName}>
+				<input
+					ref={ref}
+					type="checkbox"
+					disabled={disabled}
+					className={inputClassName}
+					{...rest}
+				/>
+				{label && <span className="text-gray-700">{label}</span>}
+			</label>
+		);
+	}
+);
+
+Checkbox.displayName = 'Checkbox';

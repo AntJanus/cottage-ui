@@ -1,4 +1,4 @@
-import type { ChangeEvent, ReactNode } from "react";
+import React, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 export enum INPUT_VARIANTS {
 	DEFAULT = 'default',
@@ -20,36 +20,26 @@ const InputSizeStyling: Record<INPUT_SIZES, string> = {
 	[INPUT_SIZES.LARGE]: 'text-lg p-3'
 }
 
-interface InputProps {
-	id?: string;
-	name?: string;
-	value?: string;
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-	placeholder?: string;
-	disabled?: boolean;
-	type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+export interface InputProps extends Omit<ComponentPropsWithoutRef<'input'>, 'size'> {
 	variant?: INPUT_VARIANTS;
 	size?: INPUT_SIZES;
-	'aria-describedby'?: string;
-	'aria-label'?: string;
 }
 
-export const Input = ({ id, name, value, onChange, placeholder, disabled = false, type = 'text', variant = INPUT_VARIANTS.DEFAULT, size = INPUT_SIZES.DEFAULT, ...ariaProps }: InputProps): ReactNode => {
-	const className = `rounded border focus:outline-none focus:ring-2 ${InputVariantStyling[variant]} ${InputSizeStyling[size]}${disabled ? ' opacity-50' : ''}`
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+	({ type = 'text', variant = INPUT_VARIANTS.DEFAULT, size = INPUT_SIZES.DEFAULT, disabled = false, className: customClassName, ...rest }, ref): ReactNode => {
+		const className = `rounded border focus:outline-none focus:ring-2 ${InputVariantStyling[variant]} ${InputSizeStyling[size]}${disabled ? ' opacity-50' : ''}${customClassName ? ` ${customClassName}` : ''}`
 
-	return (
-		<input
-			id={id}
-			name={name}
-			type={type}
-			value={value}
-			onChange={onChange}
-			placeholder={placeholder}
-			disabled={disabled}
-			aria-invalid={variant === INPUT_VARIANTS.ERROR || undefined}
-			aria-describedby={ariaProps['aria-describedby']}
-			aria-label={ariaProps['aria-label']}
-			className={className}
-		/>
-	);
-};
+		return (
+			<input
+				ref={ref}
+				type={type}
+				disabled={disabled}
+				aria-invalid={variant === INPUT_VARIANTS.ERROR || undefined}
+				className={className}
+				{...rest}
+			/>
+		);
+	}
+);
+
+Input.displayName = 'Input';

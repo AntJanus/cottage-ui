@@ -13,7 +13,9 @@ const ModalSizeStyling: Record<MODAL_SIZES, string> = {
 	[MODAL_SIZES.LARGE]: 'max-w-2xl'
 }
 
-interface ModalProps {
+import type { ComponentPropsWithoutRef } from "react";
+
+export interface ModalProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'onClick'> {
 	children: ReactNode;
 	isOpen: boolean;
 	onClose: () => void;
@@ -24,7 +26,7 @@ interface ModalProps {
 
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEFAULT, ...ariaProps }: ModalProps): ReactNode => {
+export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEFAULT, 'aria-label': ariaLabel, ...rest }: ModalProps): ReactNode => {
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 	const titleId = useId();
@@ -85,10 +87,11 @@ export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEF
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby={title ? titleId : undefined}
-				aria-label={title ? undefined : ariaProps['aria-label'] || 'Modal dialog'}
+				aria-label={title ? undefined : ariaLabel || 'Modal dialog'}
 				tabIndex={-1}
 				className={contentClassName}
 				onClick={(e) => e.stopPropagation()}
+				{...rest}
 			>
 				<div className="flex items-center justify-between mb-4">
 					{title && <h2 id={titleId} className="text-lg font-semibold">{title}</h2>}

@@ -1,11 +1,11 @@
-import { useId, useRef, type KeyboardEvent, type ReactNode } from "react";
+import { useId, useRef, type ComponentPropsWithoutRef, type KeyboardEvent, type ReactNode } from "react";
 
 export enum TAB_VARIANTS {
 	DEFAULT = 'default',
 	PILLS = 'pills'
 }
 
-interface TabItem {
+export interface TabItem {
 	label: string;
 	content: ReactNode;
 }
@@ -23,7 +23,7 @@ const TabVariantStyling: Record<TAB_VARIANTS, { tabList: string; activeTab: stri
 	}
 }
 
-interface TabsProps {
+export interface TabsProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
 	tabs: TabItem[];
 	activeTab?: number;
 	onTabChange?: (index: number) => void;
@@ -31,10 +31,12 @@ interface TabsProps {
 	'aria-label'?: string;
 }
 
-export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.DEFAULT, ...ariaProps }: TabsProps): ReactNode => {
+export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.DEFAULT, 'aria-label': ariaLabel, className: customClassName, ...rest }: TabsProps): ReactNode => {
 	const styles = TabVariantStyling[variant]
 	const baseId = useId()
 	const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+	if (tabs.length === 0) return null;
 
 	const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
 		let nextIndex: number | null = null
@@ -57,8 +59,8 @@ export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.
 	}
 
 	return (
-		<div>
-			<div role="tablist" aria-orientation="horizontal" aria-label={ariaProps['aria-label'] || 'Tabs'} className={styles.tabList}>
+		<div className={customClassName} {...rest}>
+			<div role="tablist" aria-orientation="horizontal" aria-label={ariaLabel || 'Tabs'} className={styles.tabList}>
 				{tabs.map((tab, index) => (
 					<button
 						type="button"

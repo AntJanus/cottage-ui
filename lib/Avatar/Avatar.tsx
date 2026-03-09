@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 export enum AVATAR_SIZES {
 	SMALL = 'small',
@@ -12,7 +12,7 @@ const AvatarSizeStyling: Record<AVATAR_SIZES, string> = {
 	[AVATAR_SIZES.LARGE]: 'h-14 w-14 text-lg'
 }
 
-interface AvatarProps {
+export interface AvatarProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
 	src?: string;
 	alt?: string;
 	name: string;
@@ -29,19 +29,19 @@ const getInitials = (name: string): string => {
 	return parts[0][0].toUpperCase();
 };
 
-export const Avatar = ({ src, alt, name, size = AVATAR_SIZES.DEFAULT }: AvatarProps): ReactNode => {
-	const baseClassName = `rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium ${AvatarSizeStyling[size]}`;
+export const Avatar = ({ src, alt, name, size = AVATAR_SIZES.DEFAULT, className: customClassName, ...rest }: AvatarProps): ReactNode => {
+	const baseClassName = `rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium ${AvatarSizeStyling[size]}${customClassName ? ` ${customClassName}` : ''}`;
 
 	if (src) {
 		return (
-			<div className={baseClassName}>
+			<div className={baseClassName} {...rest}>
 				<img src={src} alt={alt || name} className="h-full w-full object-cover" />
 			</div>
 		);
 	}
 
 	return (
-		<div role="img" aria-label={name} className={baseClassName}>
+		<div role="img" aria-label={name} className={baseClassName} {...rest}>
 			{getInitials(name)}
 		</div>
 	);
