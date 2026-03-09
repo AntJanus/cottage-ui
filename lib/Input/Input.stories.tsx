@@ -54,6 +54,13 @@ export const Error: Story = {
 	}
 }
 
+export const Disabled: Story = {
+	args: {
+		placeholder: 'Disabled input',
+		disabled: true
+	}
+}
+
 export const Large: Story = {
 	args: {
 		placeholder: 'Large input',

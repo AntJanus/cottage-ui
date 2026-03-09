@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test -- --run
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify dist is clean
+        run: |
+          if [ -f "dist/vite.svg" ]; then
+            echo "ERROR: vite.svg found in dist/"
+            exit 1
+          fi
+          if [ ! -f "dist/cottage-ui.d.ts" ]; then
+            echo "ERROR: TypeScript declarations missing"
+            exit 1
+          fi

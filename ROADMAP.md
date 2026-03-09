@@ -3,7 +3,6 @@
 > A React component library built with TypeScript and TailwindCSS, distributed as an npm package. Part of the "Build A React UI Library" YouTube series.
 
 ## Form Primitives
-- **Input** - Text input field with default and error variants. Supports placeholder, disabled, and type props.
 - **TextArea** - Multi-line text input with default and error variants. Supports rows, placeholder, and disabled props.
 - **Label** - Form label with default and required variants. Associates with inputs via htmlFor.
 - **Select** - Dropdown selector wrapping native select with styled chrome. Default and error variants.
@@ -27,4 +26,5 @@
 ## Future Ideas
 
 ## Completed
+- ~~**Input**~~ - Text input field with default and error variants. Supports placeholder, disabled, and type props. *(Completed: 2026-03-06)*
 - ~~**Button**~~ - Core button component with primary/default variants and default/large sizes. *(Completed: 2026-02-19)*

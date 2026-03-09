@@ -15,6 +15,7 @@ export default defineConfig({
       name: "cottage-ui",
       fileName: "cottage-ui",
     },
+    copyPublicDir: false,
     // bundler options
     // externalize react-related imports
     rollupOptions: {
