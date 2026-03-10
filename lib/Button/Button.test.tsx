@@ -63,4 +63,36 @@ describe("Component: Button", () => {
     const button = screen.getByRole('button')
     expect(button).toHaveAttribute('type', 'submit')
   });
+
+  describe("accessibility", () => {
+    it("should default type to button to prevent accidental form submission", () => {
+      render(<Button>Click me</Button>);
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('type', 'button')
+    });
+
+    it("should pass through aria-label", () => {
+      render(<Button aria-label="Close dialog">X</Button>);
+      const button = screen.getByRole('button', { name: 'Close dialog' })
+      expect(button).toBeInTheDocument()
+    });
+
+    it("should pass through aria-disabled", () => {
+      render(<Button aria-disabled="true">Click me</Button>);
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('aria-disabled', 'true')
+    });
+
+    it("should support disabled attribute", () => {
+      render(<Button disabled>Click me</Button>);
+      const button = screen.getByRole('button')
+      expect(button).toBeDisabled()
+    });
+
+    it("should derive accessible name from text content", () => {
+      render(<Button>Save changes</Button>);
+      const button = screen.getByRole('button', { name: 'Save changes' })
+      expect(button).toBeInTheDocument()
+    });
+  });
 });

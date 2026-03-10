@@ -129,4 +129,31 @@ describe("Component: Alert", () => {
 		button.click()
 		expect(mock).toHaveBeenCalledOnce()
 	});
+
+	describe("accessibility", () => {
+		it("should have role alert for live region semantics", () => {
+			render(<Alert>Important message</Alert>);
+			const element = screen.getByRole('alert')
+			expect(element).toBeInTheDocument()
+		});
+
+		it("should have dismiss button with aria-label", () => {
+			render(<Alert onDismiss={vi.fn()}>Dismissable</Alert>);
+			const button = screen.getByRole('button', { name: 'Dismiss' })
+			expect(button).toHaveAttribute('aria-label', 'Dismiss')
+		});
+
+		it("should hide dismiss X icon from assistive technology", () => {
+			render(<Alert onDismiss={vi.fn()}>Dismissable</Alert>);
+			const button = screen.getByRole('button', { name: 'Dismiss' })
+			const icon = button.querySelector('[aria-hidden]')
+			expect(icon).toHaveAttribute('aria-hidden', 'true')
+		});
+
+		it("should pass through aria-label for custom announcement", () => {
+			render(<Alert aria-label="Critical error notification">Error occurred</Alert>);
+			const element = screen.getByRole('alert')
+			expect(element).toHaveAttribute('aria-label', 'Critical error notification')
+		});
+	});
 });

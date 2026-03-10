@@ -140,4 +140,47 @@ describe("Component: Select", () => {
 		const select = screen.getByRole('combobox')
 		expect(select).not.toHaveAttribute('aria-invalid')
 	});
+
+	describe("accessibility", () => {
+		it("should pass through aria-label", () => {
+			render(<Select options={mockOptions} aria-label="Choose a color" />);
+			const select = screen.getByRole('combobox', { name: 'Choose a color' })
+			expect(select).toBeInTheDocument()
+		});
+
+		it("should pass through aria-describedby for error messages", () => {
+			render(
+				<>
+					<Select options={mockOptions} variant={SELECT_VARIANTS.ERROR} aria-describedby="select-error" />
+					<span id="select-error">Selection is required</span>
+				</>
+			);
+			const select = screen.getByRole('combobox')
+			expect(select).toHaveAttribute('aria-invalid', 'true')
+			expect(select).toHaveAttribute('aria-describedby', 'select-error')
+		});
+
+		it("should pass through aria-required", () => {
+			render(<Select options={mockOptions} aria-required="true" />);
+			const select = screen.getByRole('combobox')
+			expect(select).toHaveAttribute('aria-required', 'true')
+		});
+
+		it("should pass through required attribute", () => {
+			render(<Select options={mockOptions} required />);
+			const select = screen.getByRole('combobox')
+			expect(select).toBeRequired()
+		});
+
+		it("should be associable with a label via id", () => {
+			render(
+				<>
+					<label htmlFor="color-select">Color</label>
+					<Select id="color-select" options={mockOptions} />
+				</>
+			);
+			const select = screen.getByRole('combobox', { name: 'Color' })
+			expect(select).toBeInTheDocument()
+		});
+	});
 });

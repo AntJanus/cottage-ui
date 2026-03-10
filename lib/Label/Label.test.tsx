@@ -48,4 +48,36 @@ describe("Component: Label", () => {
 		const srText = screen.getByText('(required)');
 		expect(srText).toHaveClass('sr-only');
 	});
+
+	describe("accessibility", () => {
+		it("should render as a label element for form association", () => {
+			render(<Label>Username</Label>);
+			const label = screen.getByText('Username');
+			expect(label.tagName).toBe('LABEL');
+		});
+
+		it("should support htmlFor to associate with form controls", () => {
+			render(<Label htmlFor="email-field">Email</Label>);
+			const label = screen.getByText('Email');
+			expect(label).toHaveAttribute('for', 'email-field');
+		});
+
+		it("should hide asterisk from assistive technology in required variant", () => {
+			render(<Label variant={LABEL_VARIANTS.REQUIRED}>Email</Label>);
+			const asterisk = screen.getByText('*');
+			expect(asterisk).toHaveAttribute('aria-hidden', 'true');
+		});
+
+		it("should provide screen reader text for required indicator", () => {
+			render(<Label variant={LABEL_VARIANTS.REQUIRED}>Email</Label>);
+			const srText = screen.getByText('(required)');
+			expect(srText).toHaveClass('sr-only');
+		});
+
+		it("should not show required indicator for default variant", () => {
+			render(<Label>Username</Label>);
+			expect(screen.queryByText('*')).toBeNull();
+			expect(screen.queryByText('(required)')).toBeNull();
+		});
+	});
 });

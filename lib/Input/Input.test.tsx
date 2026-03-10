@@ -78,4 +78,47 @@ describe("Component: Input", () => {
 		expect(input).toHaveAttribute('id', 'my-input')
 		expect(input).toHaveAttribute('name', 'my-name')
 	});
+
+	describe("accessibility", () => {
+		it("should pass through aria-label", () => {
+			render(<Input aria-label="Search query" />);
+			const input = screen.getByRole('textbox', { name: 'Search query' })
+			expect(input).toBeInTheDocument()
+		});
+
+		it("should pass through aria-describedby for error messages", () => {
+			render(
+				<>
+					<Input variant={INPUT_VARIANTS.ERROR} aria-describedby="email-error" />
+					<span id="email-error">Email is required</span>
+				</>
+			);
+			const input = screen.getByRole('textbox')
+			expect(input).toHaveAttribute('aria-invalid', 'true')
+			expect(input).toHaveAttribute('aria-describedby', 'email-error')
+		});
+
+		it("should pass through aria-required", () => {
+			render(<Input aria-required="true" placeholder="Required field" />);
+			const input = screen.getByRole('textbox')
+			expect(input).toHaveAttribute('aria-required', 'true')
+		});
+
+		it("should pass through required attribute", () => {
+			render(<Input required placeholder="Required field" />);
+			const input = screen.getByRole('textbox')
+			expect(input).toBeRequired()
+		});
+
+		it("should be associable with a label via id", () => {
+			render(
+				<>
+					<label htmlFor="email-input">Email</label>
+					<Input id="email-input" />
+				</>
+			);
+			const input = screen.getByRole('textbox', { name: 'Email' })
+			expect(input).toBeInTheDocument()
+		});
+	});
 });
