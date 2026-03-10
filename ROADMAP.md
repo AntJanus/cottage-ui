@@ -1,14 +1,16 @@
 # Cottage UI Engineering Roadmap
 
-Last updated: 2026-03-09
+Last updated: 2026-03-10
 
 ## Current Status
 
 - **Version:** 1.0.0
 - **Tests:** 100 passing (15 test files)
-- **Build:** Clean (one minor TS version warning from API Extractor)
+- **Coverage:** 90% thresholds enforced (lines, functions, statements), 85% branches
+- **Build:** Clean (cosmetic TS version warning documented in `docs/TYPE_BUNDLING_WARNING.md`)
 - **CI:** `.github/workflows/ci.yml` (lint, test, build, dist verification)
 - **Components:** 15 (Button, Input, TextArea, Select, Checkbox, Label, Tabs, Modal, Card, Alert, Avatar, Badge, Stack, Divider, Spinner)
+- **Documentation:** Release checklist, Storybook controls verification, type bundling warning guide
 
 ## Completed Work
 
@@ -28,7 +30,14 @@ Last updated: 2026-03-09
 - [x] Fix Tabs empty-state crash (guard for empty tabs array + test)
 - [x] Fix Input size prop conflict with native HTML size attribute
 
-## Remaining Work
+### Phase 4: Quality Gates and Tooling Hardening -- DONE (2026-03-10)
+- [x] Add coverage thresholds to vitest config (90% lines/functions/statements, 85% branches)
+- [x] Document TS/API Extractor version warning (`docs/TYPE_BUNDLING_WARNING.md`)
+- [x] Move `vite-tsconfig-paths` from `dependencies` to `devDependencies`
+- [x] Add release checklist docs (`RELEASE_CHECKLIST.md`)
+- [x] Verify Storybook controls (`docs/STORYBOOK_CONTROLS_VERIFICATION.md`)
+
+## In Progress
 
 ### Phase 3: Accessibility and Behavioral Edge Cases
 
@@ -44,21 +53,6 @@ Definition of done:
 - Keyboard behavior is covered by automated tests, not only manual checks.
 - Accessibility defaults are explicit and documented per component.
 
-### Phase 4: Quality Gates and Tooling Hardening
-
-Priority: **P1** -- Needed before publishing to npm.
-
-- [ ] Add coverage thresholds to vitest config (start at current baseline, ratchet up)
-- [ ] Resolve TS/API Extractor version warning (`vite-plugin-dts` bundled TS 5.8.2 vs project TS 5.9.3)
-- [ ] Move `vite-tsconfig-paths` from `dependencies` to `devDependencies` (build-time only tool inflating consumer installs)
-- [ ] Add release checklist docs for Storybook verification and npm publishing flow
-- [ ] Verify Storybook controls reflect new forwardRef props and native attribute pass-through
-
-Definition of done:
-- Build pipeline is warning-free for type bundling.
-- Publishing process is repeatable and documented.
-- No build-time-only packages in runtime `dependencies`.
-
 ### Backlog (After Core Hardening)
 
 Priority: **P2/P3** -- Nice-to-have, no urgency.
@@ -72,8 +66,7 @@ Priority: **P2/P3** -- Nice-to-have, no urgency.
 
 | Issue | Severity | Notes |
 |---|---|---|
-| API Extractor TS version mismatch warning | Low | Build succeeds; cosmetic warning only. Blocked on `vite-plugin-dts` upstream update. |
-| `vite-tsconfig-paths` in runtime deps | Low | Does not affect library consumers who tree-shake, but inflates `npm install` for non-tree-shaking setups. |
+| API Extractor TS version mismatch warning | Low | Build succeeds; cosmetic warning only. Documented in `docs/TYPE_BUNDLING_WARNING.md`. Blocked on `vite-plugin-dts` upstream update. |
 
 ## Review Findings Archive
 
@@ -91,4 +84,4 @@ Original audit findings preserved for traceability.
 ### P2 (Partially Resolved)
 - Modal keyboard/focus tests -- Open, tracked in Phase 3.
 - ~~Testing libraries in runtime deps~~ -- Fixed in Phase 1.
-- API Extractor TS version warning -- Open, tracked in Phase 4.
+- ~~API Extractor TS version warning~~ -- Documented in Phase 4 (cosmetic only, safe to ignore).
