@@ -31,12 +31,15 @@ export interface TabsProps extends Omit<ComponentPropsWithoutRef<'div'>, 'childr
 	'aria-label'?: string;
 }
 
-export const Tabs = ({ tabs, activeTab = 0, onTabChange, variant = TAB_VARIANTS.DEFAULT, 'aria-label': ariaLabel, className: customClassName, ...rest }: TabsProps): ReactNode => {
+export const Tabs = ({ tabs, activeTab: activeTabProp = 0, onTabChange, variant = TAB_VARIANTS.DEFAULT, 'aria-label': ariaLabel, className: customClassName, ...rest }: TabsProps): ReactNode => {
 	const styles = TabVariantStyling[variant]
 	const baseId = useId()
 	const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
 
 	if (tabs.length === 0) return null;
+
+	// Clamp activeTab to valid range to prevent crashes from out-of-range values
+	const activeTab = Math.max(0, Math.min(activeTabProp, tabs.length - 1));
 
 	const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
 		let nextIndex: number | null = null

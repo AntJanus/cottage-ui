@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Modal, MODAL_SIZES } from "./Modal";
 
 describe("Component: Modal", () => {
@@ -94,5 +95,159 @@ describe("Component: Modal", () => {
 		const dialog = screen.getByRole('dialog');
 		expect(dialog).toHaveAttribute('aria-labelledby');
 		expect(dialog).not.toHaveAttribute('aria-label');
+	});
+
+	describe("accessibility attributes", () => {
+		it("should have role dialog", () => {
+			render(<Modal isOpen={true} onClose={vi.fn()}>Content</Modal>);
+			expect(screen.getByRole('dialog')).toBeInTheDocument();
+		});
+
+		it("should have aria-modal true", () => {
+			render(<Modal isOpen={true} onClose={vi.fn()}>Content</Modal>);
+			expect(screen.getByRole('dialog')).toHaveAttribute('aria-modal', 'true');
+		});
+
+		it("should use aria-labelledby pointing to title element", () => {
+			render(<Modal isOpen={true} onClose={vi.fn()} title="Settings">Content</Modal>);
+			const dialog = screen.getByRole('dialog');
+			const titleEl = screen.getByText('Settings');
+			expect(dialog).toHaveAttribute('aria-labelledby', titleEl.id);
+		});
+
+		it("should fall back to aria-label when no title is provided", () => {
+			render(<Modal isOpen={true} onClose={vi.fn()}>Content</Modal>);
+			const dialog = screen.getByRole('dialog');
+			expect(dialog).toHaveAttribute('aria-label', 'Modal dialog');
+		});
+
+		it("should have close button with aria-label", () => {
+			render(<Modal isOpen={true} onClose={vi.fn()}>Content</Modal>);
+			const closeBtn = screen.getByLabelText('Close');
+			expect(closeBtn).toBeInTheDocument();
+			expect(closeBtn.tagName).toBe('BUTTON');
+		});
+
+		it("should hide close button icon from assistive technology", () => {
+			render(<Modal isOpen={true} onClose={vi.fn()}>Content</Modal>);
+			const closeBtn = screen.getByLabelText('Close');
+			const icon = closeBtn.querySelector('[aria-hidden]');
+			expect(icon).toHaveAttribute('aria-hidden', 'true');
+		});
+	});
+
+	describe("keyboard and focus trap", () => {
+		it("should close on Escape key", async () => {
+			const user = userEvent.setup();
+			const mock = vi.fn();
+			render(<Modal isOpen={true} onClose={mock}>Modal content</Modal>);
+			await user.keyboard('{Escape}');
+			expect(mock).toHaveBeenCalledOnce();
+		});
+
+		it("should focus first focusable element on open", async () => {
+			render(
+				<Modal isOpen={true} onClose={vi.fn()} title="Focus Test">
+					<button type="button">First</button>
+					<button type="button">Second</button>
+				</Modal>
+			);
+			// The close button is the first focusable element in the modal
+			await waitFor(() => {
+				expect(document.activeElement).toBe(screen.getByLabelText('Close'));
+			});
+		});
+
+		it("should focus the dialog itself when no focusable children exist", async () => {
+			render(
+				<Modal isOpen={true} onClose={vi.fn()} title="No Focusable">
+					<p>Static content only</p>
+				</Modal>
+			);
+			// The close button is always present, so it should get focus
+			await waitFor(() => {
+				expect(document.activeElement).toBe(screen.getByLabelText('Close'));
+			});
+		});
+
+		it("should trap focus with Tab cycling forward", async () => {
+			const user = userEvent.setup();
+			render(
+				<Modal isOpen={true} onClose={vi.fn()} title="Trap Test">
+					<button type="button">Action A</button>
+					<button type="button">Action B</button>
+				</Modal>
+			);
+
+			await waitFor(() => {
+				expect(document.activeElement).toBe(screen.getByLabelText('Close'));
+			});
+
+			// Tab from Close button -> Action A -> Action B -> wraps back to Close
+			await user.tab();
+			expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Action A' }));
+
+			await user.tab();
+			expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Action B' }));
+
+			await user.tab();
+			expect(document.activeElement).toBe(screen.getByLabelText('Close'));
+		});
+
+		it("should trap focus with Shift+Tab cycling backward", async () => {
+			const user = userEvent.setup();
+			render(
+				<Modal isOpen={true} onClose={vi.fn()} title="Trap Test">
+					<button type="button">Action A</button>
+					<button type="button">Action B</button>
+				</Modal>
+			);
+
+			await waitFor(() => {
+				expect(document.activeElement).toBe(screen.getByLabelText('Close'));
+			});
+
+			// Shift+Tab from Close (first) should wrap to Action B (last)
+			await user.tab({ shift: true });
+			expect(document.activeElement).toBe(screen.getByRole('button', { name: 'Action B' }));
+		});
+
+		it("should restore focus to previously focused element on close", async () => {
+			const user = userEvent.setup();
+			const React = await import('react');
+
+			const TestWrapper = () => {
+				const [isOpen, setIsOpen] = React.useState(false);
+				return (
+					<>
+						<button type="button" onClick={() => setIsOpen(true)}>Open Modal</button>
+						<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Restore Focus">
+							<button type="button">Inside</button>
+						</Modal>
+					</>
+				);
+			};
+
+			render(<TestWrapper />);
+
+			const openButton = screen.getByRole('button', { name: 'Open Modal' });
+			await user.click(openButton);
+
+			await waitFor(() => {
+				expect(screen.getByRole('dialog')).toBeInTheDocument();
+			});
+
+			// Close the modal via the close button
+			await user.click(screen.getByLabelText('Close'));
+
+			await waitFor(() => {
+				expect(screen.queryByRole('dialog')).toBeNull();
+			});
+
+			// Focus should be restored to the open button
+			await waitFor(() => {
+				expect(document.activeElement).toBe(openButton);
+			});
+		});
 	});
 });

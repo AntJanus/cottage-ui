@@ -131,4 +131,75 @@ describe("Component: Tabs", () => {
 		fireEvent.keyDown(tabs[0], { key: 'End' })
 		expect(mock).toHaveBeenCalledWith(2)
 	});
+
+	describe("accessibility", () => {
+		it("should have tablist with horizontal orientation", () => {
+			render(<Tabs tabs={sampleTabs} />);
+			const tablist = screen.getByRole('tablist')
+			expect(tablist).toHaveAttribute('aria-orientation', 'horizontal')
+		});
+
+		it("should have default aria-label on tablist", () => {
+			render(<Tabs tabs={sampleTabs} />);
+			const tablist = screen.getByRole('tablist')
+			expect(tablist).toHaveAttribute('aria-label', 'Tabs')
+		});
+
+		it("should support custom aria-label on tablist", () => {
+			render(<Tabs tabs={sampleTabs} aria-label="Navigation sections" />);
+			const tablist = screen.getByRole('tablist')
+			expect(tablist).toHaveAttribute('aria-label', 'Navigation sections')
+		});
+
+		it("should use roving tabindex (0 for active, -1 for inactive)", () => {
+			render(<Tabs tabs={sampleTabs} activeTab={1} />);
+			const tabs = screen.getAllByRole('tab')
+			expect(tabs[0]).toHaveAttribute('tabindex', '-1')
+			expect(tabs[1]).toHaveAttribute('tabindex', '0')
+			expect(tabs[2]).toHaveAttribute('tabindex', '-1')
+		});
+
+		it("should link each tab to its panel via aria-controls", () => {
+			render(<Tabs tabs={sampleTabs} activeTab={0} />);
+			const tabs = screen.getAllByRole('tab')
+			const panel = screen.getByRole('tabpanel')
+			expect(tabs[0]).toHaveAttribute('aria-controls', panel.id)
+		});
+
+		it("should link panel back to tab via aria-labelledby", () => {
+			render(<Tabs tabs={sampleTabs} activeTab={0} />);
+			const tabs = screen.getAllByRole('tab')
+			const panel = screen.getByRole('tabpanel')
+			expect(panel).toHaveAttribute('aria-labelledby', tabs[0].id)
+		});
+
+		it("should make tabpanel focusable for keyboard navigation", () => {
+			render(<Tabs tabs={sampleTabs} />);
+			const panel = screen.getByRole('tabpanel')
+			expect(panel).toHaveAttribute('tabindex', '0')
+		});
+
+		it("should set aria-selected true only on active tab", () => {
+			render(<Tabs tabs={sampleTabs} activeTab={2} />);
+			const tabs = screen.getAllByRole('tab')
+			expect(tabs[0]).toHaveAttribute('aria-selected', 'false')
+			expect(tabs[1]).toHaveAttribute('aria-selected', 'false')
+			expect(tabs[2]).toHaveAttribute('aria-selected', 'true')
+		});
+
+		it("should clamp out-of-range activeTab to valid range", () => {
+			render(<Tabs tabs={sampleTabs} activeTab={99} />);
+			const tabs = screen.getAllByRole('tab')
+			// Should clamp to last tab (index 2)
+			expect(tabs[2]).toHaveAttribute('aria-selected', 'true')
+			expect(screen.getByRole('tabpanel')).toHaveTextContent('Content 3')
+		});
+
+		it("should clamp negative activeTab to zero", () => {
+			render(<Tabs tabs={sampleTabs} activeTab={-5} />);
+			const tabs = screen.getAllByRole('tab')
+			expect(tabs[0]).toHaveAttribute('aria-selected', 'true')
+			expect(screen.getByRole('tabpanel')).toHaveTextContent('Content 1')
+		});
+	});
 });
