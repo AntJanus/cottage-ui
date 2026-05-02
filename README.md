@@ -18,14 +18,14 @@ A React component library built with TypeScript, TailwindCSS, and Vite. Created 
 ## Installation
 
 ```bash
-npm install cottage-ui
+npm install @antjanus/cottage-ui
 ```
 
 ## Usage
 
 ```tsx
-import { Button, BUTTON_VARIANTS, BUTTON_SIZES } from 'cottage-ui'
-import 'cottage-ui/dist/cottage-ui.css'
+import { Button, BUTTON_VARIANTS, BUTTON_SIZES } from '@antjanus/cottage-ui'
+import '@antjanus/cottage-ui/dist/cottage-ui.css'
 
 function App() {
 	return (
@@ -79,4 +79,8 @@ cottage-ui/
 
 ## License
 
-See `package.json`.
+MIT. See [LICENSE](LICENSE).
+
+## Contributing
+
+See [CONTRIBUTING guidelines](CLAUDE.md#component-structure): add code in `lib/`, add tests and stories, export from `lib/main.ts`, then run lint/test/build before opening a PR.
