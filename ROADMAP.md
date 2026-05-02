@@ -2,7 +2,7 @@
 schema: cc-dash/roadmap@1
 project: cottage-ui
 description: React component library with cottage-style UI primitives for consistent, accessible interfaces.
-last_updated: 2026-05-02T14:30:00-06:00
+last_updated: 2026-05-02T17:25:00-06:00
 ---
 
 # Roadmap
@@ -33,6 +33,22 @@ last_updated: 2026-05-02T14:30:00-06:00
 <!-- category:housekeeping -->
 
 - <!-- id:r_nntbo status:planned --> **API Extractor TS version mismatch warning** - Low severity, build succeeds. Cosmetic warning only, documented in docs/TYPE_BUNDLING_WARNING.md. Blocked on vite-plugin-dts upstream update.
+
+## Publish v1.0.0 (npm)
+
+<!-- category:publish -->
+
+- <!-- id:r_pub01 status:done completed:2026-05-02 --> ~~**Scope package as @antjanus/cottage-ui**~~ - Updated package.json name to @antjanus/cottage-ui. *(Completed: 2026-05-02)*
+- <!-- id:r_pub02 status:done completed:2026-05-02 --> ~~**Add publishConfig.access: public**~~ - Required for free scoped npm packages. *(Completed: 2026-05-02)*
+- <!-- id:r_pub03 status:done completed:2026-05-02 --> ~~**Add MIT LICENSE file**~~ - Created LICENSE with copyright Antonin Januska <antonin@antjanus.com>. *(Completed: 2026-05-02)*
+- <!-- id:r_pub04 status:done completed:2026-05-02 --> ~~**Fill repository, homepage, bugs, license, author, description, style fields**~~ - All package.json metadata fields populated. *(Completed: 2026-05-02)*
+- <!-- id:r_pub05 status:done completed:2026-05-02 --> ~~**Update files field to include README.md and LICENSE**~~ - Pack verified: 7 files, no src/tests/planning docs. *(Completed: 2026-05-02)*
+- <!-- id:r_pub06 status:done completed:2026-05-02 --> ~~**Write CHANGELOG.md v1.0.0 entry**~~ - Summarizes all four phases. *(Completed: 2026-05-02)*
+- <!-- id:r_pub07 status:done completed:2026-05-02 --> ~~**Update README with scoped install command**~~ - npm install @antjanus/cottage-ui; added License and Contributing sections. *(Completed: 2026-05-02)*
+- <!-- id:r_pub08 status:done completed:2026-05-02 --> ~~**npm pack --dry-run verified**~~ - 7 files, 54.6 kB unpacked, no accidental inclusions. *(Completed: 2026-05-02)*
+- <!-- id:r_pub09 status:done completed:2026-05-02 --> ~~**npm publish --dry-run clean**~~ - No warnings, confirms registry target, tag latest, access public. *(Completed: 2026-05-02)*
+- <!-- id:r_pub10 status:planned --> **Run npm login + npm publish** - Blocked: requires user credentials. Run: `npm login --scope=@antjanus && npm publish --access public`. *(Planned)*
+- <!-- id:r_pub11 status:planned --> **Tag and push v1.0.0** - Run: `git tag v1.0.0 && git push origin main --tags`. *(Planned)*
 
 ## Completed
 
