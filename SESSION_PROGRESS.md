@@ -1,45 +1,38 @@
-# Session Progress — cottage-ui
+---
+schema: cc-dash/session@1
+project: cottage-ui
+session_id: s_2026-03-09_cottage-ui
+roadmap_ref: r_ksq2g
+started: 2026-03-09T09:00:00-06:00
+last_updated: 2026-05-02T14:30:00-06:00
+status: completed
+---
 
-**Date:** 2026-03-09
-**Status:** Phase 2 COMPLETE — ready for merge
+# Session Progress
 
-## What Was Done
+## Plan
 
-### Phase 1 (COMPLETE — merged to main)
-- Added `types` field + `exports["."].types` to package.json
-- Moved react/react-dom to peerDependencies (`^18.0.0 || ^19.0.0`)
-- Moved @testing-library/* to devDependencies
-- Added `copyPublicDir: false` to vite.config.ts (excludes vite.svg from dist)
-- Created `.github/workflows/ci.yml` (lint, test, build, dist verification)
-- All tests pass, build clean, dist verified
+- [ ] <!-- id:t_aelwr dep:none --> Merge feat/phase-2-api-ergonomics to main
+- [ ] <!-- id:t_r2aul dep:t_aelwr --> Optionally publish new version to npm with updated API
+- [ ] <!-- id:t_otvj4 dep:t_r2aul --> Consider Phase 3 enhancements (accessibility and behavioral edge cases)
 
-### Phase 2 (COMPLETE — branch `feat/phase-2-api-ergonomics`)
-- Extended Button, Input, TextArea, Select, Checkbox with `React.forwardRef`
-- Added `ComponentPropsWithoutRef<'element'>` to all component Props interfaces
-- Added `displayName` to all forwardRef components for React DevTools
-- Spread `...rest` props onto root elements for all components
-- Exported all Props types from `lib/main.ts` (ButtonProps, InputProps, etc.)
-- Fixed Tabs component crash by adding guard for empty tabs array
-- Added test case for empty tabs (`Tabs.test.tsx`)
-- Fixed Input size prop conflict with native HTML size attribute
-- All 100 tests pass, build succeeds, no lint errors
+## Current Status
 
-**Commit:** `feat: extend components with forwardref, native props, and tabs fix`
-**Branch:** `feat/phase-2-api-ergonomics`
+Last updated: 2026-03-09T14:22:07-06:00
+Working on: Session completed. Phase 1 (packaging) and Phase 2 (API ergonomics) shipped.
+Next: Merge feature branch, then pick up Phase 3 (accessibility) from roadmap.
+Blocked by: Nothing
 
-## Changes Summary
+## Decisions
 
-All components now:
-- Accept native HTML attributes via rest props spread
-- Support className override properly (no trailing spaces)
-- Export their Props interfaces for TypeScript consumers
-- Forward refs (Button, Input, TextArea, Select, Checkbox) for imperative DOM access
+(none)
 
-Components updated:
-- Button, Input, TextArea, Select, Checkbox (with forwardRef + displayName)
-- Modal, Card, Alert, Avatar, Badge, Stack, Divider, Spinner, Label, Tabs (with ComponentPropsWithoutRef)
+## Failed Attempts
 
-## Next Steps
-- Merge `feat/phase-2-api-ergonomics` to main
-- Optionally publish new version to npm with updated API
-- Consider Phase 3 enhancements (TBD)
+(none)
+
+## Completed Work
+
+- <!-- ref:t_aelwr at:2026-03-09T14:22:07-06:00 --> Phase 1 (Packaging): Added types/exports to package.json, moved react/react-dom to peerDependencies, moved testing libs to devDependencies, added copyPublicDir: false, created CI workflow
+- <!-- ref:t_r2aul at:2026-03-09T14:22:07-06:00 --> Phase 2 (API Ergonomics): Added forwardRef to 5 primitives, ComponentPropsWithoutRef on all components, exported Props types, fixed Tabs empty-state crash and Input size prop conflict
+- <!-- ref:t_otvj4 at:2026-03-09T14:22:07-06:00 --> All 100 tests pass, build succeeds, no lint errors
