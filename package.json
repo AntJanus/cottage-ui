@@ -1,13 +1,30 @@
 {
-  "name": "cottage-ui",
+  "name": "@antjanus/cottage-ui",
   "version": "1.0.0",
+  "description": "React component library with cottage-style UI primitives for consistent, accessible interfaces.",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antjanus/cottage-ui.git"
+  },
+  "homepage": "https://github.com/antjanus/cottage-ui#readme",
+  "bugs": {
+    "url": "https://github.com/antjanus/cottage-ui/issues"
+  },
+  "license": "MIT",
+  "author": "Antonin Januska <antonin@antjanus.com>",
   "main": "./dist/cottage-ui.umd.cjs",
   "module": "./dist/cottage-ui.js",
   "types": "./dist/cottage-ui.d.ts",
+  "style": "./dist/cottage-ui.css",
   "exports": {
     ".": {
       "types": "./dist/cottage-ui.d.ts",
@@ -16,7 +33,9 @@
     },
     "./dist/cottage-ui.css": "./dist/cottage-ui.css"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "prebuild": "rm -rf dist",
