@@ -16,6 +16,10 @@ dist-ssr
 pnpm-lock.yaml
 yarn.lock
 
+# Portfolio tracking docs (kept local, excluded from public repo)
+ROADMAP.md
+SESSION_PROGRESS.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
