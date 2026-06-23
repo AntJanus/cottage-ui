@@ -20,7 +20,7 @@
     "url": "https://github.com/antjanus/cottage-ui/issues"
   },
   "license": "MIT",
-  "author": "Antonin Januska <antonin@antjanus.com>",
+  "author": "Antonin Januska",
   "main": "./dist/cottage-ui.umd.cjs",
   "module": "./dist/cottage-ui.js",
   "types": "./dist/cottage-ui.d.ts",
