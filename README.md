@@ -40,6 +40,31 @@ function App() {
 }
 ```
 
+## Theming
+
+Cottage UI ships four themes — **cottage** (the signature AJ palette: warm clay,
+amber, pine & teal), **graphite**, **evergreen**, and **bloom** — each with a light
+and dark mode. Components are styled by semantic role, so switching theme recolors
+the whole library.
+
+Set `data-theme` (and optionally `data-mode="dark"`) on any ancestor element:
+
+```html
+<html data-theme="cottage">              <!-- light, default theme -->
+<html data-theme="graphite" data-mode="dark">
+```
+
+With no attributes set, the default is **cottage / light**. Switch at runtime by
+updating the attributes:
+
+```ts
+document.documentElement.dataset.theme = 'evergreen'
+document.documentElement.dataset.mode = 'dark'
+```
+
+Status `-strong`-on-`-soft` pairs (badges, alerts) are WCAG AA verified in both modes.
+The local demo (`npm run dev`) includes a theme/mode switcher and a palette showcase.
+
 ## Development
 
 This repo uses npm.

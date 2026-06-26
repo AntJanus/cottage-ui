@@ -20,6 +20,31 @@ npm run test -- --run
 npm run build
 ```
 
+## Theming (semantic color tokens)
+
+Colors are addressed by **semantic role**, never raw hue. Never write a Tailwind
+palette class (`bg-orange-700`, `text-gray-500`, `border-blue-500`) in a component —
+use a role token so the component recolors with the active theme.
+
+- Tokens live in `lib/tailwind.css`: `@theme inline` maps Tailwind color utilities
+  to `--cu-*` base variables; each theme block swaps the `--cu-*` values.
+- Themes: `cottage` (default, AJ signature), `graphite`, `evergreen`, `bloom`.
+  Modes: light (default) and `data-mode="dark"`. Switch by setting
+  `data-theme` / `data-mode` on any ancestor (e.g. `<html>`).
+- Role utilities:
+  - Structure: `bg-background`, `bg-surface`, `bg-surface-raised`, `border-border`,
+    `border-border-strong` (form controls), `text-foreground`, `text-muted-foreground`,
+    `text-subtle-foreground`.
+  - Brand: `bg-primary` / `bg-primary-hover` / `text-primary-foreground`,
+    `accent-primary` (form accents), `bg-accent`.
+  - Secondary action: `bg-neutral` / `bg-neutral-hover` / `text-neutral-foreground`.
+  - Status: `success` / `warning` / `error` / `info`, each with a `-soft` background
+    and a `-strong` text variant for badges/alerts (e.g. `bg-error-soft text-error-strong`).
+- `-soft` / `-strong` are derived with `color-mix(in oklab, …)`; all `-strong`-on-`-soft`
+  pairs are WCAG AA (≥4.5:1) verified in both modes. Keep that property when adding roles.
+- Palettes come from the `color-system` skill (Terracotta + Lunar Valley signature for
+  Cottage; Graphite/Evergreen/Bloom UI sets). Re-verify contrast if you change a hex.
+
 ## Component Structure
 
 Create in `lib/ComponentName/`:

@@ -37,8 +37,8 @@ export enum COMPONENT_SIZES {
 }
 
 const ComponentVariantStyling: Record<COMPONENT_VARIANTS, string> = {
-	[COMPONENT_VARIANTS.DEFAULT]: 'bg-gray-700 text-white',
-	[COMPONENT_VARIANTS.PRIMARY]: 'bg-orange-700 text-white'
+	[COMPONENT_VARIANTS.DEFAULT]: 'bg-neutral hover:bg-neutral-hover text-neutral-foreground',
+	[COMPONENT_VARIANTS.PRIMARY]: 'bg-primary hover:bg-primary-hover text-primary-foreground'
 }
 
 const ComponentSizeStyling: Record<COMPONENT_SIZES, string> = {
@@ -68,7 +68,15 @@ Rules:
 - Named component export only.
 - Enums exported.
 - Props interface internal.
-- Tailwind classes only.
+- Style with **semantic role tokens only** — never raw Tailwind palette classes
+  (`bg-orange-700`, `text-gray-500`, `border-blue-500`). Raw hues don't theme.
+  Common roles: `bg-surface` / `bg-surface-raised`, `text-foreground` /
+  `text-muted-foreground`, `border-border` / `border-border-strong`, `bg-primary` /
+  `bg-primary-hover` / `text-primary-foreground`, `bg-neutral` (secondary action),
+  and status roles `success` / `warning` / `error` / `info` with `-soft` (background)
+  + `-strong` (text) for badges/alerts. Full list and the theming model are in
+  `AGENTS.md` → Theming. If you add a status-style pair, keep `-strong`-on-`-soft`
+  at WCAG AA (≥4.5:1) in both light and dark.
 
 ## 4. Add Tests (`ComponentName.test.tsx`)
 

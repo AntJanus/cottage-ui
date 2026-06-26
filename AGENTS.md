@@ -19,7 +19,7 @@ Cottage UI is a React component library with:
 cottage-ui/
 ├── lib/                          # Published source
 │   ├── main.ts                   # Public exports
-│   ├── tailwind.css              # Tailwind imports
+│   ├── tailwind.css              # Tailwind import + semantic color tokens / themes
 │   ├── test/
 │   │   └── setup.ts              # Test setup
 │   ├── Button/
@@ -58,7 +58,9 @@ Rules:
 - Every enum value must exist in the corresponding style record.
 - Enum props should default to `DEFAULT` enum members where applicable.
 - Return type is `ReactNode`.
-- Use Tailwind classes only.
+- Style with **semantic role tokens only** — never raw Tailwind palette classes
+  (`bg-orange-700`, `text-gray-500`, `border-blue-500`). Raw hues don't theme. See
+  the Theming section below.
 
 Example:
 
@@ -71,8 +73,8 @@ export enum BADGE_VARIANTS {
 }
 
 const BadgeVariantStyling: Record<BADGE_VARIANTS, string> = {
-	[BADGE_VARIANTS.DEFAULT]: 'bg-gray-100 text-gray-800',
-	[BADGE_VARIANTS.PRIMARY]: 'bg-orange-100 text-orange-800'
+	[BADGE_VARIANTS.DEFAULT]: 'bg-neutral-soft text-neutral-strong',
+	[BADGE_VARIANTS.PRIMARY]: 'bg-primary-soft text-primary-strong'
 }
 
 interface BadgeProps {
@@ -120,6 +122,30 @@ import './tailwind.css'
 export { Button, BUTTON_VARIANTS, BUTTON_SIZES } from './Button/Button'
 ```
 
+## Theming (semantic color tokens)
+
+Colors are addressed by role, never hue, so components recolor with the active theme.
+
+- Tokens are defined in `lib/tailwind.css`: `@theme inline` maps Tailwind color
+  utilities to `--cu-*` base variables; each theme block swaps those variables.
+- Themes: `cottage` (default, AJ signature), `graphite`, `evergreen`, `bloom`.
+  Modes: light (default) and `data-mode="dark"`. Set `data-theme` / `data-mode` on
+  any ancestor (e.g. `<html>`) to switch.
+- Role utilities available to components:
+  - Structure: `bg-background`, `bg-surface`, `bg-surface-raised`, `border-border`,
+    `border-border-strong` (form controls), `text-foreground`, `text-muted-foreground`,
+    `text-subtle-foreground`.
+  - Brand: `bg-primary` / `bg-primary-hover` / `text-primary-foreground`, `bg-accent`,
+    `accent-primary` (native form accents).
+  - Secondary action: `bg-neutral` / `bg-neutral-hover` / `text-neutral-foreground`.
+  - Status (`success` / `warning` / `error` / `info`): solid (`bg-*`, `border-*`) plus a
+    `-soft` background and `-strong` text for badges/alerts
+    (e.g. `bg-error-soft text-error-strong`).
+- `-soft` / `-strong` are derived via `color-mix(in oklab, …)`; every `-strong`-on-`-soft`
+  pair is WCAG AA (≥4.5:1) verified in both modes. Preserve that when adding a role,
+  and re-check contrast if you change a base hex (palettes come from the `color-system`
+  skill). The local demo (`npm run dev`) has a theme/mode switcher and palette showcase.
+
 ## Accessibility Baseline
 
 Every component should meet these defaults:
@@ -144,4 +170,4 @@ Before merging component changes:
 - `lib/Modal/` for portal + focus/escape behavior
 
 ---
-Last updated: March 2, 2026
+Last updated: June 26, 2026
