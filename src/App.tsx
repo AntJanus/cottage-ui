@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	Button, BUTTON_VARIANTS, BUTTON_SIZES,
 	Input, INPUT_VARIANTS, INPUT_SIZES,
@@ -17,7 +17,103 @@ import {
 	Avatar, AVATAR_SIZES,
 } from "cottage-ui";
 
+const THEMES = [
+	{ id: "cottage", label: "AJ Cottage", blurb: "Signature — warm clay, amber, pine & teal" },
+	{ id: "graphite", label: "Graphite", blurb: "Cool slate + blue, dense dashboards" },
+	{ id: "evergreen", label: "Evergreen", blurb: "Emerald on neutral zinc" },
+	{ id: "bloom", label: "Bloom", blurb: "Pastel periwinkle & violet" },
+] as const;
+
+type ThemeId = (typeof THEMES)[number]["id"];
+type Mode = "light" | "dark";
+
+const SWATCHES = [
+	{ label: "primary", className: "bg-primary text-primary-foreground" },
+	{ label: "primary-hover", className: "bg-primary-hover text-primary-foreground" },
+	{ label: "accent", className: "bg-accent text-accent-foreground" },
+	{ label: "neutral", className: "bg-neutral text-neutral-foreground" },
+	{ label: "success", className: "bg-success text-surface" },
+	{ label: "warning", className: "bg-warning text-surface" },
+	{ label: "error", className: "bg-error text-surface" },
+	{ label: "info", className: "bg-info text-surface" },
+];
+
+const SURFACES = [
+	{ label: "background", className: "bg-background" },
+	{ label: "surface", className: "bg-surface" },
+	{ label: "surface-raised", className: "bg-surface-raised" },
+	{ label: "border", className: "bg-border" },
+	{ label: "muted-foreground", className: "bg-muted-foreground" },
+	{ label: "foreground", className: "bg-foreground" },
+];
+
+function ThemeSwitcher({ theme, mode, onTheme, onMode }: {
+	theme: ThemeId; mode: Mode;
+	onTheme: (id: ThemeId) => void; onMode: (mode: Mode) => void;
+}) {
+	const active = THEMES.find((option) => option.id === theme)!;
+	return (
+		<div className="sticky top-0 z-40 -mx-8 mb-8 border-b border-border bg-surface/90 px-8 py-4 backdrop-blur">
+			<Stack direction={STACK_DIRECTIONS.HORIZONTAL} gap={STACK_GAPS.DEFAULT} className="flex-wrap items-center">
+				{THEMES.map((option) => (
+					<Button
+						key={option.id}
+						variant={option.id === theme ? BUTTON_VARIANTS.PRIMARY : BUTTON_VARIANTS.DEFAULT}
+						onClick={() => onTheme(option.id)}
+						aria-pressed={option.id === theme}
+					>
+						{option.label}
+					</Button>
+				))}
+				<div className="ml-auto">
+					<Checkbox
+						checked={mode === "dark"}
+						onChange={(event) => onMode(event.target.checked ? "dark" : "light")}
+						label="Dark mode"
+					/>
+				</div>
+			</Stack>
+			<p className="mt-2 text-sm text-muted-foreground">{active.blurb}</p>
+		</div>
+	);
+}
+
+function PaletteShowcase() {
+	return (
+		<section className="mb-10">
+			<h2 className="text-xl font-semibold mb-4">Palette</h2>
+			<p className="text-sm text-muted-foreground mb-4">
+				Every component reads these semantic roles — swap the theme above to recolor the whole library.
+			</p>
+			<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+				{SWATCHES.map((swatch) => (
+					<div key={swatch.label} className={`rounded p-4 text-sm font-medium ${swatch.className}`}>
+						{swatch.label}
+					</div>
+				))}
+			</div>
+			<div className="mt-3 flex flex-wrap gap-3">
+				{SURFACES.map((surface) => (
+					<div key={surface.label} className="flex items-center gap-2 text-sm text-muted-foreground">
+						<span className={`inline-block h-6 w-6 rounded border border-border ${surface.className}`} />
+						{surface.label}
+					</div>
+				))}
+			</div>
+		</section>
+	);
+}
+
 function App() {
+	const [theme, setTheme] = useState<ThemeId>("cottage");
+	const [mode, setMode] = useState<Mode>("light");
+
+	useEffect(() => {
+		const root = document.documentElement;
+		root.dataset.theme = theme;
+		root.dataset.mode = mode;
+	}, [theme, mode]);
+
 	const [inputValue, setInputValue] = useState("");
 	const [errorInputValue, setErrorInputValue] = useState("");
 	const [textAreaValue, setTextAreaValue] = useState("");
@@ -32,9 +128,16 @@ function App() {
 	const [showAlert, setShowAlert] = useState(true);
 
 	return (
-		<div className="min-h-screen bg-gray-50 p-8">
+		<div className="min-h-screen bg-background text-foreground p-8">
 			<div className="max-w-4xl mx-auto">
-				<h1 className="text-3xl font-bold mb-8">Cottage UI</h1>
+				<ThemeSwitcher theme={theme} mode={mode} onTheme={setTheme} onMode={setMode} />
+
+				<h1 className="text-3xl font-bold mb-2">Cottage UI</h1>
+				<p className="text-muted-foreground mb-8">Themeable React components · {THEMES.find((t) => t.id === theme)!.label} theme</p>
+
+				<PaletteShowcase />
+
+				<Divider />
 
 				{/* Button */}
 				<section className="mb-10">
@@ -246,15 +349,15 @@ function App() {
 					<Stack direction={STACK_DIRECTIONS.HORIZONTAL} gap={STACK_GAPS.LARGE}>
 						<div className="text-center">
 							<Spinner size={SPINNER_SIZES.SMALL} />
-							<p className="text-sm text-gray-500 mt-2">Small</p>
+							<p className="text-sm text-muted-foreground mt-2">Small</p>
 						</div>
 						<div className="text-center">
 							<Spinner />
-							<p className="text-sm text-gray-500 mt-2">Default</p>
+							<p className="text-sm text-muted-foreground mt-2">Default</p>
 						</div>
 						<div className="text-center">
 							<Spinner size={SPINNER_SIZES.LARGE} />
-							<p className="text-sm text-gray-500 mt-2">Large</p>
+							<p className="text-sm text-muted-foreground mt-2">Large</p>
 						</div>
 					</Stack>
 				</section>
@@ -322,16 +425,16 @@ function App() {
 						</Button>
 					</Stack>
 					<Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Example Modal">
-						<p className="text-gray-600 mb-4">This is the modal content. Click the X or the backdrop to close.</p>
+						<p className="text-muted-foreground mb-4">This is the modal content. Click the X or the backdrop to close.</p>
 						<Button variant={BUTTON_VARIANTS.PRIMARY} onClick={() => setModalOpen(false)}>
 							Close
 						</Button>
 					</Modal>
 					<Modal isOpen={smallModalOpen} onClose={() => setSmallModalOpen(false)} title="Small Modal" size={MODAL_SIZES.SMALL}>
-						<p className="text-gray-600 mb-4">This is a small modal.</p>
+						<p className="text-muted-foreground mb-4">This is a small modal.</p>
 					</Modal>
 					<Modal isOpen={largeModalOpen} onClose={() => setLargeModalOpen(false)} title="Large Modal" size={MODAL_SIZES.LARGE}>
-						<p className="text-gray-600 mb-4">This is a large modal with more room for content.</p>
+						<p className="text-muted-foreground mb-4">This is a large modal with more room for content.</p>
 					</Modal>
 				</section>
 
@@ -361,14 +464,14 @@ function App() {
 				{/* Divider demo */}
 				<section className="mb-10">
 					<h2 className="text-xl font-semibold mb-4">Divider</h2>
-					<p className="text-gray-600">Content above the divider</p>
+					<p className="text-muted-foreground">Content above the divider</p>
 					<Divider />
-					<p className="text-gray-600">Content below the divider</p>
+					<p className="text-muted-foreground">Content below the divider</p>
 					<Label>Vertical Divider</Label>
 					<Stack direction={STACK_DIRECTIONS.HORIZONTAL} gap={STACK_GAPS.DEFAULT}>
-						<p className="text-gray-600">Left</p>
+						<p className="text-muted-foreground">Left</p>
 						<Divider orientation={DIVIDER_ORIENTATIONS.VERTICAL} />
-						<p className="text-gray-600">Right</p>
+						<p className="text-muted-foreground">Right</p>
 					</Stack>
 				</section>
 			</div>
