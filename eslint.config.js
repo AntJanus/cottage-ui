@@ -6,7 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import storybook from 'eslint-plugin-storybook'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'storybook-static', 'coverage'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
