@@ -9,7 +9,7 @@ describe("Component: Button", () => {
 
     expect(button).toMatchInlineSnapshot(`
       <button
-        class="rounded p-2 bg-gray-700 hover:bg-gray-800 text-white "
+        class="rounded p-2 bg-neutral hover:bg-neutral-hover text-neutral-foreground "
         type="button"
       >
         My button
@@ -24,7 +24,7 @@ describe("Component: Button", () => {
 
     expect(button).toMatchInlineSnapshot(`
       <button
-        class="rounded p-2 bg-orange-700 hover:bg-orange-500 text-white "
+        class="rounded p-2 bg-primary hover:bg-primary-hover text-primary-foreground "
         type="button"
       >
         My button
@@ -38,7 +38,7 @@ describe("Component: Button", () => {
 
     expect(button).toMatchInlineSnapshot(`
       <button
-        class="rounded p-2 bg-gray-700 hover:bg-gray-800 text-white text-lg"
+        class="rounded p-2 bg-neutral hover:bg-neutral-hover text-neutral-foreground text-lg"
         type="button"
       >
         My button

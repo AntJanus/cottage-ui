@@ -7,7 +7,7 @@ describe("Component: TextArea", () => {
 		const element = screen.getByRole('textbox')
 		expect(element).toMatchInlineSnapshot(`
 			<textarea
-			  class="rounded border p-2 focus:outline-none focus:ring-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+			  class="rounded border p-2 focus:outline-none focus:ring-2 border-border-strong focus:ring-primary focus:border-primary"
 			  placeholder="Enter text"
 			  rows="3"
 			/>
@@ -20,7 +20,7 @@ describe("Component: TextArea", () => {
 		expect(element).toMatchInlineSnapshot(`
 			<textarea
 			  aria-invalid="true"
-			  class="rounded border p-2 focus:outline-none focus:ring-2 border-red-500 focus:ring-red-500 focus:border-red-500"
+			  class="rounded border p-2 focus:outline-none focus:ring-2 border-error focus:ring-error focus:border-error"
 			  placeholder="Enter text"
 			  rows="3"
 			/>
@@ -32,7 +32,7 @@ describe("Component: TextArea", () => {
 		const element = screen.getByRole('textbox')
 		expect(element).toMatchInlineSnapshot(`
 			<textarea
-			  class="rounded border p-2 focus:outline-none focus:ring-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 opacity-50"
+			  class="rounded border p-2 focus:outline-none focus:ring-2 border-border-strong focus:ring-primary focus:border-primary opacity-50"
 			  disabled=""
 			  placeholder="Enter text"
 			  rows="3"
@@ -45,7 +45,7 @@ describe("Component: TextArea", () => {
 		const element = screen.getByRole('textbox')
 		expect(element).toMatchInlineSnapshot(`
 			<textarea
-			  class="rounded border p-2 focus:outline-none focus:ring-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+			  class="rounded border p-2 focus:outline-none focus:ring-2 border-border-strong focus:ring-primary focus:border-primary"
 			  placeholder="Enter text"
 			  rows="5"
 			/>

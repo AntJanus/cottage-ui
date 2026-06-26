@@ -10,7 +10,7 @@ describe("Component: Modal", () => {
 			<div
 			  aria-label="Modal dialog"
 			  aria-modal="true"
-			  class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative"
+			  class="bg-surface-raised text-foreground rounded-lg shadow-xl w-full max-w-md p-6 relative"
 			  role="dialog"
 			  tabindex="-1"
 			>
@@ -19,7 +19,7 @@ describe("Component: Modal", () => {
 			  >
 			    <button
 			      aria-label="Close"
-			      class="ml-auto text-gray-400 hover:text-gray-600"
+			      class="ml-auto text-subtle-foreground hover:text-foreground"
 			      type="button"
 			    >
 			      <span

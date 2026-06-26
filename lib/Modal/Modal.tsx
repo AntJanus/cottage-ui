@@ -78,7 +78,7 @@ export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEF
 
 	if (!isOpen) return null;
 
-	const contentClassName = `bg-white rounded-lg shadow-xl w-full ${ModalSizeStyling[size]} p-6 relative`;
+	const contentClassName = `bg-surface-raised text-foreground rounded-lg shadow-xl w-full ${ModalSizeStyling[size]} p-6 relative`;
 
 	return createPortal(
 		<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
@@ -95,7 +95,7 @@ export const Modal = ({ children, isOpen, onClose, title, size = MODAL_SIZES.DEF
 			>
 				<div className="flex items-center justify-between mb-4">
 					{title && <h2 id={titleId} className="text-lg font-semibold">{title}</h2>}
-					<button type="button" onClick={onClose} className="ml-auto text-gray-400 hover:text-gray-600" aria-label="Close">
+					<button type="button" onClick={onClose} className="ml-auto text-subtle-foreground hover:text-foreground" aria-label="Close">
 						<span aria-hidden="true">&#x2715;</span>
 					</button>
 				</div>

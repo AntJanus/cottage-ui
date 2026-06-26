@@ -7,7 +7,7 @@ describe("Component: Alert", () => {
 		const element = screen.getByRole('alert')
 		expect(element).toMatchInlineSnapshot(`
 			<div
-			  class="rounded p-4 border-l-4 bg-blue-50 border-blue-500 text-blue-800"
+			  class="rounded p-4 border-l-4 bg-info-soft border-info text-info-strong"
 			  role="alert"
 			>
 			  <div
@@ -26,7 +26,7 @@ describe("Component: Alert", () => {
 		const element = screen.getByRole('alert')
 		expect(element).toMatchInlineSnapshot(`
 			<div
-			  class="rounded p-4 border-l-4 bg-blue-50 border-blue-500 text-blue-800"
+			  class="rounded p-4 border-l-4 bg-info-soft border-info text-info-strong"
 			  role="alert"
 			>
 			  <div
@@ -45,7 +45,7 @@ describe("Component: Alert", () => {
 		const element = screen.getByRole('alert')
 		expect(element).toMatchInlineSnapshot(`
 			<div
-			  class="rounded p-4 border-l-4 bg-green-50 border-green-500 text-green-800"
+			  class="rounded p-4 border-l-4 bg-success-soft border-success text-success-strong"
 			  role="alert"
 			>
 			  <div
@@ -64,7 +64,7 @@ describe("Component: Alert", () => {
 		const element = screen.getByRole('alert')
 		expect(element).toMatchInlineSnapshot(`
 			<div
-			  class="rounded p-4 border-l-4 bg-yellow-50 border-yellow-500 text-yellow-800"
+			  class="rounded p-4 border-l-4 bg-warning-soft border-warning text-warning-strong"
 			  role="alert"
 			>
 			  <div
@@ -83,7 +83,7 @@ describe("Component: Alert", () => {
 		const element = screen.getByRole('alert')
 		expect(element).toMatchInlineSnapshot(`
 			<div
-			  class="rounded p-4 border-l-4 bg-red-50 border-red-500 text-red-800"
+			  class="rounded p-4 border-l-4 bg-error-soft border-error text-error-strong"
 			  role="alert"
 			>
 			  <div
@@ -103,7 +103,7 @@ describe("Component: Alert", () => {
 		expect(title.tagName).toBe('STRONG')
 		expect(screen.getByRole('alert')).toMatchInlineSnapshot(`
 			<div
-			  class="rounded p-4 border-l-4 bg-blue-50 border-blue-500 text-blue-800"
+			  class="rounded p-4 border-l-4 bg-info-soft border-info text-info-strong"
 			  role="alert"
 			>
 			  <div

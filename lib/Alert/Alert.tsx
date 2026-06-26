@@ -9,11 +9,11 @@ export enum ALERT_VARIANTS {
 }
 
 const AlertVariantStyling: Record<ALERT_VARIANTS, string> = {
-	[ALERT_VARIANTS.DEFAULT]: 'bg-blue-50 border-blue-500 text-blue-800',
-	[ALERT_VARIANTS.INFO]: 'bg-blue-50 border-blue-500 text-blue-800',
-	[ALERT_VARIANTS.SUCCESS]: 'bg-green-50 border-green-500 text-green-800',
-	[ALERT_VARIANTS.WARNING]: 'bg-yellow-50 border-yellow-500 text-yellow-800',
-	[ALERT_VARIANTS.ERROR]: 'bg-red-50 border-red-500 text-red-800'
+	[ALERT_VARIANTS.DEFAULT]: 'bg-info-soft border-info text-info-strong',
+	[ALERT_VARIANTS.INFO]: 'bg-info-soft border-info text-info-strong',
+	[ALERT_VARIANTS.SUCCESS]: 'bg-success-soft border-success text-success-strong',
+	[ALERT_VARIANTS.WARNING]: 'bg-warning-soft border-warning text-warning-strong',
+	[ALERT_VARIANTS.ERROR]: 'bg-error-soft border-error text-error-strong'
 }
 
 export interface AlertProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {

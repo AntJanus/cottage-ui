@@ -7,7 +7,7 @@ describe("Component: Checkbox", () => {
 		const element = screen.getByRole('checkbox')
 		expect(element).toMatchInlineSnapshot(`
 			<input
-			  class="accent-orange-600"
+			  class="accent-primary"
 			  type="checkbox"
 			/>
 		`);
@@ -18,7 +18,7 @@ describe("Component: Checkbox", () => {
 		const element = screen.getByRole('checkbox')
 		expect(element).toMatchInlineSnapshot(`
 			<input
-			  class="accent-orange-600"
+			  class="accent-primary"
 			  type="checkbox"
 			/>
 		`);
@@ -29,7 +29,7 @@ describe("Component: Checkbox", () => {
 		const element = screen.getByRole('checkbox')
 		expect(element).toMatchInlineSnapshot(`
 			<input
-			  class="accent-orange-600"
+			  class="accent-primary"
 			  disabled=""
 			  type="checkbox"
 			/>
@@ -41,7 +41,7 @@ describe("Component: Checkbox", () => {
 		const label = screen.getByText('Accept terms')
 		expect(label).toMatchInlineSnapshot(`
 			<span
-			  class="text-gray-700"
+			  class="text-foreground"
 			>
 			  Accept terms
 			</span>

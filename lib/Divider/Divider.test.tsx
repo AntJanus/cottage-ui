@@ -7,7 +7,7 @@ describe("Component: Divider", () => {
 		const divider = screen.getByRole('separator');
 		expect(divider).toMatchInlineSnapshot(`
 			<hr
-			  class="border-t border-gray-200 my-4"
+			  class="border-t border-border my-4"
 			/>
 		`);
 	});
@@ -17,7 +17,7 @@ describe("Component: Divider", () => {
 		const divider = screen.getByRole('separator');
 		expect(divider).toMatchInlineSnapshot(`
 			<hr
-			  class="border-t border-gray-200 my-4"
+			  class="border-t border-border my-4"
 			/>
 		`);
 	});
@@ -29,7 +29,7 @@ describe("Component: Divider", () => {
 		expect(divider).toMatchInlineSnapshot(`
 			<div
 			  aria-orientation="vertical"
-			  class="border-l border-gray-200 mx-4 self-stretch"
+			  class="border-l border-border mx-4 self-stretch"
 			  role="separator"
 			/>
 		`);

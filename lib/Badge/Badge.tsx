@@ -9,11 +9,11 @@ export enum BADGE_VARIANTS {
 }
 
 const BadgeVariantStyling: Record<BADGE_VARIANTS, string> = {
-	[BADGE_VARIANTS.DEFAULT]: 'bg-gray-100 text-gray-800',
-	[BADGE_VARIANTS.PRIMARY]: 'bg-orange-100 text-orange-800',
-	[BADGE_VARIANTS.SUCCESS]: 'bg-green-100 text-green-800',
-	[BADGE_VARIANTS.WARNING]: 'bg-yellow-100 text-yellow-800',
-	[BADGE_VARIANTS.DANGER]: 'bg-red-100 text-red-800'
+	[BADGE_VARIANTS.DEFAULT]: 'bg-neutral-soft text-neutral-strong',
+	[BADGE_VARIANTS.PRIMARY]: 'bg-primary-soft text-primary-strong',
+	[BADGE_VARIANTS.SUCCESS]: 'bg-success-soft text-success-strong',
+	[BADGE_VARIANTS.WARNING]: 'bg-warning-soft text-warning-strong',
+	[BADGE_VARIANTS.DANGER]: 'bg-error-soft text-error-strong'
 }
 
 export interface BadgeProps extends Omit<ComponentPropsWithoutRef<'span'>, 'children'> {

@@ -11,8 +11,8 @@ export enum BUTTON_SIZES {
 }
 
 const ButtonVariantStyling: Record<BUTTON_VARIANTS, string> = {
-	[BUTTON_VARIANTS.PRIMARY]: 'bg-orange-700 hover:bg-orange-500 text-white',
-	[BUTTON_VARIANTS.DEFAULT]: 'bg-gray-700 hover:bg-gray-800 text-white'
+	[BUTTON_VARIANTS.PRIMARY]: 'bg-primary hover:bg-primary-hover text-primary-foreground',
+	[BUTTON_VARIANTS.DEFAULT]: 'bg-neutral hover:bg-neutral-hover text-neutral-foreground'
 }
 
 const ButtonSizeStyling: Record<BUTTON_SIZES, string> = {

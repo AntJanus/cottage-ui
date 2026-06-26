@@ -1,1 +1,250 @@
 @import "tailwindcss";
+
+/*
+  Cottage UI theming system
+  -------------------------
+  Colors are addressed by semantic ROLE, never by raw hue. Every utility
+  (bg-primary, text-foreground, border-border, bg-success-soft, …) resolves to a
+  `--cu-*` base variable that is swapped per theme.
+
+  Switch themes/modes by setting attributes on any ancestor element:
+    <html data-theme="cottage">              light (default theme)
+    <html data-theme="graphite" data-mode="dark">
+
+  Themes: cottage (default, AJ signature) · graphite · evergreen · bloom
+  Modes:  light (default) · dark (data-mode="dark")
+
+  `-soft`  = tint of the role on the surface (badge / alert backgrounds)
+  `-strong`= shade of the role toward foreground (badge / alert text, AA-verified)
+*/
+
+@theme inline {
+	/* structure */
+	--color-background: var(--cu-background);
+	--color-surface: var(--cu-surface);
+	--color-surface-raised: var(--cu-surface-raised);
+	--color-border: var(--cu-border);
+	--color-border-strong: color-mix(in oklab, var(--cu-border) 55%, var(--cu-foreground));
+	--color-foreground: var(--cu-foreground);
+	--color-muted-foreground: var(--cu-muted-foreground);
+	--color-subtle-foreground: color-mix(in oklab, var(--cu-muted-foreground) 62%, var(--cu-background));
+
+	/* brand */
+	--color-primary: var(--cu-primary);
+	--color-primary-hover: var(--cu-primary-hover);
+	--color-primary-foreground: var(--cu-primary-foreground);
+	--color-primary-soft: color-mix(in oklab, var(--cu-primary) 12%, var(--cu-surface));
+	--color-primary-strong: color-mix(in oklab, var(--cu-primary) 50%, var(--cu-foreground));
+
+	/* accent */
+	--color-accent: var(--cu-accent);
+	--color-accent-foreground: var(--cu-accent-foreground);
+	--color-accent-soft: color-mix(in oklab, var(--cu-accent) 12%, var(--cu-surface));
+	--color-accent-strong: color-mix(in oklab, var(--cu-accent) 50%, var(--cu-foreground));
+
+	/* neutral action (secondary buttons, default badges) */
+	--color-neutral: var(--cu-neutral);
+	--color-neutral-hover: var(--cu-neutral-hover);
+	--color-neutral-foreground: var(--cu-neutral-foreground);
+	--color-neutral-soft: color-mix(in oklab, var(--cu-neutral) 12%, var(--cu-surface));
+	--color-neutral-strong: color-mix(in oklab, var(--cu-neutral) 50%, var(--cu-foreground));
+
+	/* status */
+	--color-success: var(--cu-success);
+	--color-success-soft: color-mix(in oklab, var(--cu-success) 12%, var(--cu-surface));
+	--color-success-strong: color-mix(in oklab, var(--cu-success) 50%, var(--cu-foreground));
+
+	--color-warning: var(--cu-warning);
+	--color-warning-soft: color-mix(in oklab, var(--cu-warning) 12%, var(--cu-surface));
+	--color-warning-strong: color-mix(in oklab, var(--cu-warning) 50%, var(--cu-foreground));
+
+	--color-error: var(--cu-error);
+	--color-error-soft: color-mix(in oklab, var(--cu-error) 12%, var(--cu-surface));
+	--color-error-strong: color-mix(in oklab, var(--cu-error) 50%, var(--cu-foreground));
+
+	--color-info: var(--cu-info);
+	--color-info-soft: color-mix(in oklab, var(--cu-info) 12%, var(--cu-surface));
+	--color-info-strong: color-mix(in oklab, var(--cu-info) 50%, var(--cu-foreground));
+}
+
+/* ============================================================
+   AJ Cottage — signature warm clay / amber / pine / teal
+   (default theme; also applies when no data-theme is set)
+   ============================================================ */
+:root,
+[data-theme="cottage"] {
+	--cu-background: #f7f1ea;
+	--cu-surface: #fffdfb;
+	--cu-surface-raised: #f1e8de;
+	--cu-border: #e6dccf;
+	--cu-foreground: #2a201a;
+	--cu-muted-foreground: #756558;
+	--cu-primary: #b5532e;
+	--cu-primary-hover: #9a4322;
+	--cu-primary-foreground: #fffaf6;
+	--cu-accent: #3e8a8b;
+	--cu-accent-foreground: #ffffff;
+	--cu-neutral: #6b5849;
+	--cu-neutral-hover: #54453a;
+	--cu-neutral-foreground: #ffffff;
+	--cu-success: #557c56;
+	--cu-warning: #c98a2b;
+	--cu-error: #c0533f;
+	--cu-info: #3e6f8e;
+}
+
+[data-theme="cottage"][data-mode="dark"] {
+	--cu-background: #1f1714;
+	--cu-surface: #2a201b;
+	--cu-surface-raised: #3a2d25;
+	--cu-border: #41322a;
+	--cu-foreground: #f7ede4;
+	--cu-muted-foreground: #c0a896;
+	--cu-primary: #e08a5c;
+	--cu-primary-hover: #ec9d72;
+	--cu-primary-foreground: #2a1810;
+	--cu-accent: #5bc6c2;
+	--cu-accent-foreground: #10302e;
+	--cu-neutral: #4a3d34;
+	--cu-neutral-hover: #5c4d42;
+	--cu-neutral-foreground: #f7ede4;
+	--cu-success: #8fae72;
+	--cu-warning: #e8a93c;
+	--cu-error: #e58a6f;
+	--cu-info: #6fa0c4;
+}
+
+/* ============================================================
+   Graphite — cool slate + blue · dense dashboards, dev tools
+   ============================================================ */
+[data-theme="graphite"] {
+	--cu-background: #f8fafc;
+	--cu-surface: #ffffff;
+	--cu-surface-raised: #f1f5f9;
+	--cu-border: #e2e8f0;
+	--cu-foreground: #0f172a;
+	--cu-muted-foreground: #64748b;
+	--cu-primary: #2563eb;
+	--cu-primary-hover: #1d4ed8;
+	--cu-primary-foreground: #ffffff;
+	--cu-accent: #7c3aed;
+	--cu-accent-foreground: #ffffff;
+	--cu-neutral: #334155;
+	--cu-neutral-hover: #1e293b;
+	--cu-neutral-foreground: #ffffff;
+	--cu-success: #16a34a;
+	--cu-warning: #d97706;
+	--cu-error: #dc2626;
+	--cu-info: #0284c7;
+}
+
+[data-theme="graphite"][data-mode="dark"] {
+	--cu-background: #0d1117;
+	--cu-surface: #161b22;
+	--cu-surface-raised: #21262d;
+	--cu-border: #30363d;
+	--cu-foreground: #e6edf3;
+	--cu-muted-foreground: #8b949e;
+	--cu-primary: #388bfd;
+	--cu-primary-hover: #58a6ff;
+	--cu-primary-foreground: #0d1117;
+	--cu-accent: #a371f7;
+	--cu-accent-foreground: #0d1117;
+	--cu-neutral: #30363d;
+	--cu-neutral-hover: #3d444d;
+	--cu-neutral-foreground: #e6edf3;
+	--cu-success: #3fb950;
+	--cu-warning: #d29922;
+	--cu-error: #f85149;
+	--cu-info: #388bfd;
+}
+
+/* ============================================================
+   Evergreen — emerald on neutral zinc · fresh, non-blue
+   ============================================================ */
+[data-theme="evergreen"] {
+	--cu-background: #fafafa;
+	--cu-surface: #ffffff;
+	--cu-surface-raised: #f4f4f5;
+	--cu-border: #e4e4e7;
+	--cu-foreground: #18181b;
+	--cu-muted-foreground: #71717a;
+	--cu-primary: #047857;
+	--cu-primary-hover: #036648;
+	--cu-primary-foreground: #ffffff;
+	--cu-accent: #0d9488;
+	--cu-accent-foreground: #ffffff;
+	--cu-neutral: #3f3f46;
+	--cu-neutral-hover: #27272a;
+	--cu-neutral-foreground: #ffffff;
+	--cu-success: #16a34a;
+	--cu-warning: #d97706;
+	--cu-error: #dc2626;
+	--cu-info: #0891b2;
+}
+
+[data-theme="evergreen"][data-mode="dark"] {
+	--cu-background: #18181b;
+	--cu-surface: #27272a;
+	--cu-surface-raised: #3f3f46;
+	--cu-border: #3f3f46;
+	--cu-foreground: #fafafa;
+	--cu-muted-foreground: #a1a1aa;
+	--cu-primary: #34d399;
+	--cu-primary-hover: #6ee7b7;
+	--cu-primary-foreground: #0a1f17;
+	--cu-accent: #2dd4bf;
+	--cu-accent-foreground: #0a1f17;
+	--cu-neutral: #3f3f46;
+	--cu-neutral-hover: #52525b;
+	--cu-neutral-foreground: #fafafa;
+	--cu-success: #4ade80;
+	--cu-warning: #fbbf24;
+	--cu-error: #f87171;
+	--cu-info: #22d3ee;
+}
+
+/* ============================================================
+   Bloom — pastel periwinkle / violet · friendly, playful
+   ============================================================ */
+[data-theme="bloom"] {
+	--cu-background: #f6f5fb;
+	--cu-surface: #ffffff;
+	--cu-surface-raised: #efedf7;
+	--cu-border: #e0dcef;
+	--cu-foreground: #3b3654;
+	--cu-muted-foreground: #6f6a87;
+	--cu-primary: #6d5ef0;
+	--cu-primary-hover: #5a4bd8;
+	--cu-primary-foreground: #ffffff;
+	--cu-accent: #a855f7;
+	--cu-accent-foreground: #ffffff;
+	--cu-neutral: #4a4566;
+	--cu-neutral-hover: #383350;
+	--cu-neutral-foreground: #ffffff;
+	--cu-success: #22a06b;
+	--cu-warning: #d98e0b;
+	--cu-error: #e0356b;
+	--cu-info: #2aa7d8;
+}
+
+[data-theme="bloom"][data-mode="dark"] {
+	--cu-background: #16141f;
+	--cu-surface: #1f1c2b;
+	--cu-surface-raised: #2b2740;
+	--cu-border: #383350;
+	--cu-foreground: #ece9f7;
+	--cu-muted-foreground: #b0aacb;
+	--cu-primary: #a594ff;
+	--cu-primary-hover: #c4b8ff;
+	--cu-primary-foreground: #1a1530;
+	--cu-accent: #d8a0ff;
+	--cu-accent-foreground: #1a1530;
+	--cu-neutral: #2b2740;
+	--cu-neutral-hover: #383350;
+	--cu-neutral-foreground: #ece9f7;
+	--cu-success: #7ee0a8;
+	--cu-warning: #f5c97a;
+	--cu-error: #ff7aa2;
+	--cu-info: #7ad4f0;
+}

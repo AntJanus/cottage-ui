@@ -7,7 +7,7 @@ describe("Component: Badge", () => {
 		const badge = screen.getByRole('status')
 		expect(badge).toMatchInlineSnapshot(`
 			<span
-			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-gray-100 text-gray-800"
+			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-neutral-soft text-neutral-strong"
 			  role="status"
 			>
 			  Default
@@ -20,7 +20,7 @@ describe("Component: Badge", () => {
 		const badge = screen.getByRole('status')
 		expect(badge).toMatchInlineSnapshot(`
 			<span
-			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-orange-100 text-orange-800"
+			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-primary-soft text-primary-strong"
 			  role="status"
 			>
 			  Primary
@@ -33,7 +33,7 @@ describe("Component: Badge", () => {
 		const badge = screen.getByRole('status')
 		expect(badge).toMatchInlineSnapshot(`
 			<span
-			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-green-100 text-green-800"
+			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-success-soft text-success-strong"
 			  role="status"
 			>
 			  Success
@@ -46,7 +46,7 @@ describe("Component: Badge", () => {
 		const badge = screen.getByRole('status')
 		expect(badge).toMatchInlineSnapshot(`
 			<span
-			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-yellow-100 text-yellow-800"
+			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-warning-soft text-warning-strong"
 			  role="status"
 			>
 			  Warning
@@ -59,7 +59,7 @@ describe("Component: Badge", () => {
 		const badge = screen.getByRole('status')
 		expect(badge).toMatchInlineSnapshot(`
 			<span
-			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-red-100 text-red-800"
+			  class="inline-block rounded-full px-3 py-1 text-sm font-medium bg-error-soft text-error-strong"
 			  role="status"
 			>
 			  Danger

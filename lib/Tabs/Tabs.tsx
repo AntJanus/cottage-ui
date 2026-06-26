@@ -12,14 +12,14 @@ export interface TabItem {
 
 const TabVariantStyling: Record<TAB_VARIANTS, { tabList: string; activeTab: string; inactiveTab: string }> = {
 	[TAB_VARIANTS.DEFAULT]: {
-		tabList: 'flex border-b-2 border-gray-200',
-		activeTab: 'px-4 py-2 border-b-2 border-orange-500 text-orange-700 -mb-[2px]',
-		inactiveTab: 'px-4 py-2 border-b-2 border-transparent text-gray-500 -mb-[2px]'
+		tabList: 'flex border-b-2 border-border',
+		activeTab: 'px-4 py-2 border-b-2 border-primary text-primary -mb-[2px]',
+		inactiveTab: 'px-4 py-2 border-b-2 border-transparent text-muted-foreground -mb-[2px]'
 	},
 	[TAB_VARIANTS.PILLS]: {
 		tabList: 'flex gap-2',
-		activeTab: 'px-4 py-2 bg-orange-100 text-orange-700 rounded',
-		inactiveTab: 'px-4 py-2 text-gray-500 rounded'
+		activeTab: 'px-4 py-2 bg-primary-soft text-primary-strong rounded',
+		inactiveTab: 'px-4 py-2 text-muted-foreground rounded'
 	}
 }
 

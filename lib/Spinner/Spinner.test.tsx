@@ -11,7 +11,7 @@ describe("Component: Spinner", () => {
 			  role="status"
 			>
 			  <div
-			    class="rounded-full border-2 border-gray-200 border-t-orange-600 animate-spin h-8 w-8"
+			    class="rounded-full border-2 border-border border-t-primary animate-spin h-8 w-8"
 			  />
 			</div>
 		`);
@@ -26,7 +26,7 @@ describe("Component: Spinner", () => {
 			  role="status"
 			>
 			  <div
-			    class="rounded-full border-2 border-gray-200 border-t-orange-600 animate-spin h-4 w-4"
+			    class="rounded-full border-2 border-border border-t-primary animate-spin h-4 w-4"
 			  />
 			</div>
 		`);
@@ -41,7 +41,7 @@ describe("Component: Spinner", () => {
 			  role="status"
 			>
 			  <div
-			    class="rounded-full border-2 border-gray-200 border-t-orange-600 animate-spin h-12 w-12"
+			    class="rounded-full border-2 border-border border-t-primary animate-spin h-12 w-12"
 			  />
 			</div>
 		`);

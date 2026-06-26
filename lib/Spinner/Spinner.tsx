@@ -18,7 +18,7 @@ export interface SpinnerProps extends Omit<ComponentPropsWithoutRef<'div'>, 'chi
 }
 
 export const Spinner = ({ size = SPINNER_SIZES.DEFAULT, label = 'Loading', className: customClassName, ...rest }: SpinnerProps): ReactNode => {
-	const spinnerClassName = `rounded-full border-2 border-gray-200 border-t-orange-600 animate-spin ${SpinnerSizeStyling[size]}`;
+	const spinnerClassName = `rounded-full border-2 border-border border-t-primary animate-spin ${SpinnerSizeStyling[size]}`;
 
 	return (
 		<div role="status" aria-label={label} className={customClassName} {...rest}>

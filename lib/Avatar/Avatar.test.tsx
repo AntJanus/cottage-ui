@@ -8,7 +8,7 @@ describe("Component: Avatar", () => {
 		expect(avatar).toMatchInlineSnapshot(`
 			<div
 			  aria-label="John Doe"
-			  class="rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium h-10 w-10 text-sm"
+			  class="rounded-full overflow-hidden flex items-center justify-center bg-primary-soft text-primary-strong font-medium h-10 w-10 text-sm"
 			  role="img"
 			>
 			  JD
@@ -22,7 +22,7 @@ describe("Component: Avatar", () => {
 		expect(avatar).toMatchInlineSnapshot(`
 			<div
 			  aria-label="John"
-			  class="rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium h-10 w-10 text-sm"
+			  class="rounded-full overflow-hidden flex items-center justify-center bg-primary-soft text-primary-strong font-medium h-10 w-10 text-sm"
 			  role="img"
 			>
 			  J
@@ -48,7 +48,7 @@ describe("Component: Avatar", () => {
 		expect(avatar).toMatchInlineSnapshot(`
 			<div
 			  aria-label="John Doe"
-			  class="rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium h-8 w-8 text-xs"
+			  class="rounded-full overflow-hidden flex items-center justify-center bg-primary-soft text-primary-strong font-medium h-8 w-8 text-xs"
 			  role="img"
 			>
 			  JD
@@ -62,7 +62,7 @@ describe("Component: Avatar", () => {
 		expect(avatar).toMatchInlineSnapshot(`
 			<div
 			  aria-label="John Doe"
-			  class="rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium h-14 w-14 text-lg"
+			  class="rounded-full overflow-hidden flex items-center justify-center bg-primary-soft text-primary-strong font-medium h-14 w-14 text-lg"
 			  role="img"
 			>
 			  JD

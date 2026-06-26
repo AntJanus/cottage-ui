@@ -7,7 +7,7 @@ describe("Component: Card", () => {
 		const article = screen.getByRole('article')
 		expect(article).toMatchInlineSnapshot(`
 			<article
-			  class="bg-white rounded shadow-sm"
+			  class="bg-surface rounded shadow-sm"
 			>
 			  <div
 			    class="p-4"
@@ -23,7 +23,7 @@ describe("Component: Card", () => {
 		const article = screen.getByRole('article')
 		expect(article).toMatchInlineSnapshot(`
 			<article
-			  class="border border-gray-200 rounded"
+			  class="border border-border rounded"
 			>
 			  <div
 			    class="p-4"
@@ -39,7 +39,7 @@ describe("Component: Card", () => {
 		const article = screen.getByRole('article')
 		expect(article).toMatchInlineSnapshot(`
 			<article
-			  class="bg-white rounded shadow-lg"
+			  class="bg-surface rounded shadow-lg"
 			>
 			  <div
 			    class="p-4"
@@ -55,7 +55,7 @@ describe("Component: Card", () => {
 		const header = screen.getByText('Card Header')
 		expect(header).toMatchInlineSnapshot(`
 			<header
-			  class="p-4 border-b border-gray-200"
+			  class="p-4 border-b border-border"
 			>
 			  Card Header
 			</header>
@@ -67,7 +67,7 @@ describe("Component: Card", () => {
 		const footer = screen.getByText('Card Footer')
 		expect(footer).toMatchInlineSnapshot(`
 			<footer
-			  class="p-4 border-t border-gray-200"
+			  class="p-4 border-t border-border"
 			>
 			  Card Footer
 			</footer>
@@ -79,10 +79,10 @@ describe("Component: Card", () => {
 		const article = screen.getByRole('article')
 		expect(article).toMatchInlineSnapshot(`
 			<article
-			  class="bg-white rounded shadow-sm"
+			  class="bg-surface rounded shadow-sm"
 			>
 			  <header
-			    class="p-4 border-b border-gray-200"
+			    class="p-4 border-b border-border"
 			  >
 			    Header
 			  </header>
@@ -92,7 +92,7 @@ describe("Component: Card", () => {
 			    Body
 			  </div>
 			  <footer
-			    class="p-4 border-t border-gray-200"
+			    class="p-4 border-t border-border"
 			  >
 			    Footer
 			  </footer>

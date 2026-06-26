@@ -7,7 +7,7 @@ describe("Component: Label", () => {
 		const label = screen.getByText('Username');
 		expect(label).toMatchInlineSnapshot(`
 			<label
-			  class="text-gray-700 font-medium text-sm"
+			  class="text-foreground font-medium text-sm"
 			>
 			  Username
 			</label>
@@ -19,12 +19,12 @@ describe("Component: Label", () => {
 		const label = screen.getByText('Email');
 		expect(label.closest('label')).toMatchInlineSnapshot(`
 			<label
-			  class="text-gray-800 font-semibold text-sm"
+			  class="text-foreground font-semibold text-sm"
 			>
 			  Email
 			  <span
 			    aria-hidden="true"
-			    class="text-red-500 ml-1"
+			    class="text-error ml-1"
 			  >
 			    *
 			  </span>

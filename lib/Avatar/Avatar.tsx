@@ -30,7 +30,7 @@ const getInitials = (name: string): string => {
 };
 
 export const Avatar = ({ src, alt, name, size = AVATAR_SIZES.DEFAULT, className: customClassName, ...rest }: AvatarProps): ReactNode => {
-	const baseClassName = `rounded-full overflow-hidden flex items-center justify-center bg-orange-100 text-orange-800 font-medium ${AvatarSizeStyling[size]}${customClassName ? ` ${customClassName}` : ''}`;
+	const baseClassName = `rounded-full overflow-hidden flex items-center justify-center bg-primary-soft text-primary-strong font-medium ${AvatarSizeStyling[size]}${customClassName ? ` ${customClassName}` : ''}`;
 
 	if (src) {
 		return (

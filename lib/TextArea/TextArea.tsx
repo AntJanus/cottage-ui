@@ -6,8 +6,8 @@ export enum TEXTAREA_VARIANTS {
 }
 
 const TextAreaVariantStyling: Record<TEXTAREA_VARIANTS, string> = {
-	[TEXTAREA_VARIANTS.DEFAULT]: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500',
-	[TEXTAREA_VARIANTS.ERROR]: 'border-red-500 focus:ring-red-500 focus:border-red-500'
+	[TEXTAREA_VARIANTS.DEFAULT]: 'border-border-strong focus:ring-primary focus:border-primary',
+	[TEXTAREA_VARIANTS.ERROR]: 'border-error focus:ring-error focus:border-error'
 }
 
 export interface TextAreaProps extends ComponentPropsWithoutRef<'textarea'> {

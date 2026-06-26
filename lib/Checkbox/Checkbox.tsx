@@ -5,7 +5,7 @@ export enum CHECKBOX_VARIANTS {
 }
 
 const CheckboxVariantStyling: Record<CHECKBOX_VARIANTS, string> = {
-	[CHECKBOX_VARIANTS.DEFAULT]: 'accent-orange-600'
+	[CHECKBOX_VARIANTS.DEFAULT]: 'accent-primary'
 }
 
 export interface CheckboxProps extends Omit<ComponentPropsWithoutRef<'input'>, 'type'> {
@@ -27,7 +27,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 					className={inputClassName}
 					{...rest}
 				/>
-				{label && <span className="text-gray-700">{label}</span>}
+				{label && <span className="text-foreground">{label}</span>}
 			</label>
 		);
 	}

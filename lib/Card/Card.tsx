@@ -7,9 +7,9 @@ export enum CARD_VARIANTS {
 }
 
 const CardVariantStyling: Record<CARD_VARIANTS, string> = {
-	[CARD_VARIANTS.DEFAULT]: 'bg-white rounded shadow-sm',
-	[CARD_VARIANTS.OUTLINED]: 'border border-gray-200 rounded',
-	[CARD_VARIANTS.ELEVATED]: 'bg-white rounded shadow-lg'
+	[CARD_VARIANTS.DEFAULT]: 'bg-surface rounded shadow-sm',
+	[CARD_VARIANTS.OUTLINED]: 'border border-border rounded',
+	[CARD_VARIANTS.ELEVATED]: 'bg-surface rounded shadow-lg'
 }
 
 export interface CardProps extends Omit<ComponentPropsWithoutRef<'article'>, 'children'> {
@@ -24,9 +24,9 @@ export const Card = ({ children, header, footer, variant = CARD_VARIANTS.DEFAULT
 
 	return (
 		<article className={className} {...rest}>
-			{header && <header className="p-4 border-b border-gray-200">{header}</header>}
+			{header && <header className="p-4 border-b border-border">{header}</header>}
 			<div className="p-4">{children}</div>
-			{footer && <footer className="p-4 border-t border-gray-200">{footer}</footer>}
+			{footer && <footer className="p-4 border-t border-border">{footer}</footer>}
 		</article>
 	);
 };

@@ -7,9 +7,9 @@ export enum DIVIDER_ORIENTATIONS {
 }
 
 const DividerOrientationStyling: Record<DIVIDER_ORIENTATIONS, string> = {
-	[DIVIDER_ORIENTATIONS.DEFAULT]: 'border-t border-gray-200 my-4',
-	[DIVIDER_ORIENTATIONS.HORIZONTAL]: 'border-t border-gray-200 my-4',
-	[DIVIDER_ORIENTATIONS.VERTICAL]: 'border-l border-gray-200 mx-4 self-stretch'
+	[DIVIDER_ORIENTATIONS.DEFAULT]: 'border-t border-border my-4',
+	[DIVIDER_ORIENTATIONS.HORIZONTAL]: 'border-t border-border my-4',
+	[DIVIDER_ORIENTATIONS.VERTICAL]: 'border-l border-border mx-4 self-stretch'
 }
 
 export interface DividerProps extends ComponentPropsWithoutRef<'hr'> {

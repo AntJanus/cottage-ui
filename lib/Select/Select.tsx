@@ -6,8 +6,8 @@ export enum SELECT_VARIANTS {
 }
 
 const SelectVariantStyling: Record<SELECT_VARIANTS, string> = {
-	[SELECT_VARIANTS.DEFAULT]: 'border-gray-300 focus:ring-blue-500 focus:border-blue-500',
-	[SELECT_VARIANTS.ERROR]: 'border-red-500 focus:ring-red-500 focus:border-red-500'
+	[SELECT_VARIANTS.DEFAULT]: 'border-border-strong focus:ring-primary focus:border-primary',
+	[SELECT_VARIANTS.ERROR]: 'border-error focus:ring-error focus:border-error'
 }
 
 export interface SelectOption {

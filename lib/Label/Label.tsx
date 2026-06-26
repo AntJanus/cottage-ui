@@ -6,8 +6,8 @@ export enum LABEL_VARIANTS {
 }
 
 const LabelVariantStyling: Record<LABEL_VARIANTS, string> = {
-	[LABEL_VARIANTS.DEFAULT]: 'text-gray-700 font-medium text-sm',
-	[LABEL_VARIANTS.REQUIRED]: 'text-gray-800 font-semibold text-sm'
+	[LABEL_VARIANTS.DEFAULT]: 'text-foreground font-medium text-sm',
+	[LABEL_VARIANTS.REQUIRED]: 'text-foreground font-semibold text-sm'
 }
 
 export interface LabelProps extends Omit<ComponentPropsWithoutRef<'label'>, 'children'> {
@@ -21,7 +21,7 @@ export const Label = ({ children, variant = LABEL_VARIANTS.DEFAULT, className: c
 	return (
 		<label className={className} {...rest}>
 			{children}
-			{variant === LABEL_VARIANTS.REQUIRED && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
+			{variant === LABEL_VARIANTS.REQUIRED && <span className="text-error ml-1" aria-hidden="true">*</span>}
 			{variant === LABEL_VARIANTS.REQUIRED && <span className="sr-only">(required)</span>}
 		</label>
 	);
