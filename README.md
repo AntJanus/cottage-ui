@@ -1,5 +1,7 @@
 # Cottage UI
 
+> 🌐 **PUBLIC repository** — hosted publicly on GitHub. Scrub PII and secrets before every commit.
+
 A React component library built with TypeScript, TailwindCSS, and Vite. Created as part of the [Build A React UI Library series](https://www.youtube.com/playlist?list=PLcfAVClOb1BiA6oIfHQ6Am3lpWzOmMO6J).
 
 ## Demo

@@ -1,4 +1,5 @@
 {
+  "visibility": "public",
   "name": "@antjanus/cottage-ui",
   "version": "2.0.0",
   "description": "React component library with cottage-style UI primitives for consistent, accessible interfaces.",
